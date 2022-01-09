@@ -18,7 +18,7 @@
     "@nestjs/microservices": "7.6.15",
     "@nestjs/mongoose": "7.2.4",
     "@nestjs/platform-express": "7.6.15",
-    "bcrypt": "5.0.0",
+    "bcryptjs": "^2.4.3",
     "mongoose": "5.11.15",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
