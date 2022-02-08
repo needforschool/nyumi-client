@@ -10,7 +10,7 @@ import {
 } from '../mocks/user-signup-request-fail.mock';
 import { userSignupRequestSuccess } from '../mocks/user-signup-request-success.mock';
 
-describe('Users Sign In (e2e)', () => {
+describe('Users Sign Up (e2e)', () => {
   let app;
 
   afterAll(async () => {
@@ -31,9 +31,9 @@ describe('Users Sign In (e2e)', () => {
     app.close();
   });
 
-  it('/users/register (POST) - should not create user without request body', (done) => {
+  it('/auth/register (POST) - should not create user without request body', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send()
       .expect(412)
       .expect((res) => {
@@ -63,9 +63,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/register (POST) - should not create a user if request body is string', (done) => {
+  it('/auth/register (POST) - should not create a user if request body is string', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send('test')
       .expect((res) => {
         res.body.errors.email.properties = 'fake_properties';
@@ -94,9 +94,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/register (POST) - should not create user without password', (done) => {
+  it('/auth/register (POST) - should not create user without password', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send(userSignupRequestFailNoPw)
       .expect(412)
       .expect((res) => {
@@ -118,9 +118,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/register (POST) - should not create user if password is short', (done) => {
+  it('/auth/register (POST) - should not create user if password is short', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send(userSignupRequestFailShortPw)
       .expect(412)
       .expect((res) => {
@@ -143,9 +143,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/register (POST) - should not create user without email', (done) => {
+  it('/auth/register (POST) - should not create user without email', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send({
         password: 'test111',
       })
@@ -169,9 +169,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/register (POST) - should not create user with invalid email', (done) => {
+  it('/auth/register (POST) - should not create user with invalid email', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send(userSignupRequestFailInvalidEmail)
       .expect(412)
       .expect((res) => {
@@ -194,9 +194,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/register (POST) - should create a valid user', (done) => {
+  it('/auth/register (POST) - should create a valid user', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send(userSignupRequestSuccess)
       .expect(201)
       .expect((res) => {
@@ -218,9 +218,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/register (POST) - should not create user with existing email', (done) => {
+  it('/auth/register (POST) - should not create user with existing email', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send(userSignupRequestSuccess)
       .expect(409)
       .expect({

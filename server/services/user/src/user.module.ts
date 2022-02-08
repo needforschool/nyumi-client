@@ -7,6 +7,7 @@ import { MongoConfigService } from "./services/config/mongo-config.service";
 import { UserService } from "./services/user.service";
 import { UserController } from "./controllers/user.controller";
 import { TokenModule } from "./token.module";
+import { ProfileModule } from "./profile.module";
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { TokenModule } from "./token.module";
         collection: 'users'
       }
     ], 'user-svc'),
-    TokenModule
+    TokenModule,
+    ProfileModule
   ],
   controllers: [
     UserController
