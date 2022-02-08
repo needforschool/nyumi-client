@@ -1,13 +1,13 @@
 import { Body, Controller, HttpException, HttpStatus, Inject, Post } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
 
-import { CreateUserDto } from "interfaces/user/dto/create-user.dto";
-import { LoginUserDto } from "interfaces/user/dto/login-user.dto";
-import { CreateUserResponseDto } from "interfaces/user/dto/response/create-user-response.dto";
-import { LoginUserResponseDto } from "interfaces/user/dto/response/login-user-response.dto";
-import { IServiceUserCreateResponse } from "interfaces/user/service-user-create-response.interface";
-import { IServiceUserSearchResponse } from "interfaces/user/service-user-search-response.interface";
-import { IServiveUserTokenCreateResponse } from "interfaces/user/service-user-token-create-response.interface";
+import { CreateUserDto } from "../interfaces/user/dto/create-user.dto";
+import { LoginUserDto } from "../interfaces/user/dto/login-user.dto";
+import { CreateUserResponseDto } from "../interfaces/user/dto/response/create-user-response.dto";
+import { LoginUserResponseDto } from "../interfaces/user/dto/response/login-user-response.dto";
+import { IServiceUserCreateResponse } from "../interfaces/user/service-user-create-response.interface";
+import { IServiceUserSearchResponse } from "../interfaces/user/service-user-search-response.interface";
+import { IServiveUserTokenCreateResponse } from "../interfaces/user/service-user-token-create-response.interface";
 
 @Controller("auth")
 export class AuthController {

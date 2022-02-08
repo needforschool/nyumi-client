@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
 import { ClientProxyFactory } from "@nestjs/microservices";
 
-import { AuthController } from "controllers/auth.controller";
+import { AuthController } from "./controllers/auth.controller";
 import { AuthenticationGuard } from "./common/guards/authentication.guard";
 import { PermissionGuard } from "./common/guards/permission.guard";
 

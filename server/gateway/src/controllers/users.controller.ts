@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Inject, Post } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
 
-import { GetAllUsersResponseDto } from "interfaces/user/dto/response/get-all-user-reponse.dto";
+import { GetAllUsersResponseDto } from "../interfaces/user/dto/response/get-all-user-reponse.dto";
 import { Role } from "../common/enums/role.enum";
 import { Auth } from "../common/decorators/auth.decorator";
 
