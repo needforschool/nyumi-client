@@ -1,3 +1,4 @@
+import { IonHeader, IonPage, IonToolbar } from "@ionic/react";
 import styled from "styled-components";
 
 interface Props {
@@ -6,21 +7,11 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ children, title }: Props) => {
-  return (
-    <Container>
-      {title && (
-        <Header>
-          {" "}
-          <Title>{title}</Title>
-        </Header>
-      )}
-      {children}
-    </Container>
-  );
+  return <Container>{children}</Container>;
 };
 
-const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors.layout.darkest};
+const Container = styled(IonPage)`
+  background-color: ${({ theme }) => theme.colors.layout.darker};
   color: ${({ theme }) => theme.colors.text.lightest};
   display: flex;
   flex-direction: column;
@@ -28,8 +19,12 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Header = styled.header`
+const Header = styled(IonHeader)`
   padding: 15px;
+`;
+
+const Toolbar = styled(IonToolbar)`
+  --background: ${({ theme }) => theme.colors.layout.darker};
 `;
 
 const Title = styled.h1`
