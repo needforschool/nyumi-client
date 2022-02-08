@@ -23,7 +23,7 @@ export class ProfileController {
     }
   }
 
-  @MessagePattern('create_profile')
+  @MessagePattern('profile_create')
   public async createProfile(data: IProfile): Promise<IProfileByIdResponse> {
     const profile = await this.service.createProfile(data);
 
