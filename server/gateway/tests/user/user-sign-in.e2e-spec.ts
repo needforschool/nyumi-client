@@ -12,7 +12,7 @@ import {
 describe('Users Sign In (e2e)', () => {
   let app;
 
-  beforeAll(async () => {
+  afterAll(async () => {
     await mongoose.connect(process.env.MONGO_DSN, { useNewUrlParser: true, useUnifiedTopology: true });
     await mongoose.connection.dropDatabase();
   });
