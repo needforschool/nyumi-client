@@ -30,6 +30,11 @@ describe('Users Sign In (e2e)', () => {
     app.close();
   });
 
+  /**
+   * @Given email and password
+   * @When
+   * @Then returns created user
+   */
   it('/users/register (POST) - should create a valid user', (done) => {
     return request(app.getHttpServer())
       .post('/users/register')
@@ -38,6 +43,11 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
+  /**
+   * @Given email and password
+   * @When email is wrong
+   * @Then returns error
+   */
   it('/users/login (POST) - should not create a token for invalid email', (done) => {
     return request(app.getHttpServer())
       .post('/users/login')
