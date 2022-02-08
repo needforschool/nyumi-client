@@ -28,7 +28,7 @@ export class ProfilesController {
     };
   }
 
-  @Get('/:id')
+  @Get(':id')
   async getProfileById(@Param('id') id: string): Promise<GetProfileByIdReponseDto> {
     const response = await this.service
       .send('get_profile_by_id', { id })
@@ -43,7 +43,7 @@ export class ProfilesController {
     };
   }
 
-  @Get('/user/:userId')
+  @Get('user/:userId')
   async getProfileByUserId(@Param('userId') userId: string): Promise<GetProfileByIdReponseDto> {
     const response = await this.service
       .send('get_profile_by_userid', { userId })
