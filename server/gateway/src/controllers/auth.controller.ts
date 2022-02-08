@@ -1,7 +1,6 @@
 import { Body, Controller, HttpException, HttpStatus, Inject, Post } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
 
-import { IServiceProfileCreateResponse } from "../interfaces/profile/service-user-create-response.interface";
 import { CreateUserDto } from "../interfaces/user/dto/create-user.dto";
 import { LoginUserDto } from "../interfaces/user/dto/login-user.dto";
 import { CreateUserResponseDto } from "../interfaces/user/dto/response/create-user-response.dto";
@@ -38,17 +37,10 @@ export class AuthController {
       })
       .toPromise();
 
-    const createProfile: IServiceProfileCreateResponse = await this.userService
-      .send('profile_create', {
-        userId: createUserResponse.user.id,
-      })
-      .toPromise();
-
     return {
       message: createUserResponse.message,
       data: {
         user: createUserResponse.user,
-        profile: createProfile.profile,
         token: createTokenResponse.token,
       },
       errors: null,
