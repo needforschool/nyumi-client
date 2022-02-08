@@ -35,9 +35,9 @@ describe('Users Sign In (e2e)', () => {
    * @When
    * @Then returns created user
    */
-  it('/users/register (POST) - should create a valid user', (done) => {
+  it('/auth/register (POST) - should create a valid user', (done) => {
     return request(app.getHttpServer())
-      .post('/users/register')
+      .post('/auth/register')
       .send(userSignupRequestSuccess)
       .expect(201)
       .end(done);
@@ -48,9 +48,9 @@ describe('Users Sign In (e2e)', () => {
    * @When email is wrong
    * @Then returns error
    */
-  it('/users/login (POST) - should not create a token for invalid email', (done) => {
+  it('/auth/login (POST) - should not create a token for invalid email', (done) => {
     return request(app.getHttpServer())
-      .post('/users/login')
+      .post('/auth/login')
       .send(userLoginRequestFailWrongEmail)
       .expect(401)
       .expect({
@@ -61,9 +61,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/login (POST) - should not create a token for invalid password', (done) => {
+  it('/auth/login (POST) - should not create a token for invalid password', (done) => {
     return request(app.getHttpServer())
-      .post('/users/login')
+      .post('/auth/login')
       .send(userLoginRequestFailWrongPw)
       .expect(401)
       .expect({
@@ -74,9 +74,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/login (POST) - should not create a token for empty body', (done) => {
+  it('/auth/login (POST) - should not create a token for empty body', (done) => {
     return request(app.getHttpServer())
-      .post('/users/login')
+      .post('/auth/login')
       .send()
       .expect(401)
       .expect({
@@ -87,9 +87,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/login (POST) - should not create a token for string value in body', (done) => {
+  it('/auth/login (POST) - should not create a token for string value in body', (done) => {
     return request(app.getHttpServer())
-      .post('/users/login')
+      .post('/auth/login')
       .send(userSignupRequestSuccess.email)
       .expect(401)
       .expect({
@@ -100,9 +100,9 @@ describe('Users Sign In (e2e)', () => {
       .end(done);
   });
 
-  it('/users/login (POST) - should create a token for valid credentials', (done) => {
+  it('/auth/login (POST) - should create a token for valid credentials', (done) => {
     return request(app.getHttpServer())
-      .post('/users/login')
+      .post('/auth/login')
       .send(userSignupRequestSuccess)
       .expect(201)
       .expect((res) => {
