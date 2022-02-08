@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.onruntime.nyumi",
 	"appName": "client",
 	"webDir": "build",
 	"bundledWebRuntime": false
