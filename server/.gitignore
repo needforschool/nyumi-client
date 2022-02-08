@@ -3,4 +3,4 @@
 .env.test
 .env.test.local
 
-.dev
+db
