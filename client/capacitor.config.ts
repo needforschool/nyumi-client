@@ -1,10 +1,10 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.onruntime.nyumi',
   appName: 'client',
   webDir: 'build',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
 };
 
 export default config;
