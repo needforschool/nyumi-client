@@ -1,4 +1,6 @@
-const main = {
+import { MainTheme } from "../../types/themes";
+
+const main: MainTheme = {
   family: {
     primary: "Poppins, sans-serif",
   },
