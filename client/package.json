@@ -10,6 +10,7 @@
     "@capacitor/ios": "3.3.4",
     "@capacitor/keyboard": "1.2.0",
     "@capacitor/status-bar": "1.0.6",
+    "@ionic/lab": "^3.2.10",
     "@ionic/react": "^6.0.0",
     "@ionic/react-router": "^6.0.0",
     "@testing-library/jest-dom": "^5.11.9",

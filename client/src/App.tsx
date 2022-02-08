@@ -31,54 +31,51 @@ import Account from "./screens/Account";
 import Statistic from "./screens/Statistic";
 import Welcome from "./screens/Welcome";
 import React from "react";
+import {
+  ThemeContext,
+  ThemeProvider as ThemeContextProvider,
+} from "./context/Theme";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [theme, setTheme] = React.useState(themes.light);
-
-  React.useEffect(() => {
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      setTheme(themes.dark);
-    }
-  }, []);
+  const { theme } = React.useContext(ThemeContext);
 
   return (
-    <ThemeProvider theme={theme}>
-      <IonApp>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route exact path={ROUTES.WELCOME}>
-              <Welcome />
-            </Route>
-            <Route exact path={ROUTES.STATISTICS}>
-              <Statistic />
-            </Route>
-            <Route exact path={ROUTES.ACCOUNT}>
-              <Account />
-            </Route>
-            <Route exact path={ROUTES.RECOVERY_CHANGE}>
-              <RecoveryChange />
-            </Route>
-            <Route exact path={ROUTES.RECOVERY}>
-              <Recovery />
-            </Route>
-            <Route exact path={ROUTES.SIGN_IN}>
-              <SignIn />
-            </Route>
-            <Route exact path={ROUTES.SIGN_UP}>
-              <SignUp />
-            </Route>
-            <Route path={ROUTES.MAIN}>
-              <Home />
-            </Route>
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </IonApp>
-    </ThemeProvider>
+    <ThemeContextProvider>
+      <ThemeProvider theme={theme}>
+        <IonApp>
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route exact path={ROUTES.WELCOME}>
+                <Welcome />
+              </Route>
+              <Route exact path={ROUTES.STATISTICS}>
+                <Statistic />
+              </Route>
+              <Route exact path={ROUTES.ACCOUNT}>
+                <Account />
+              </Route>
+              <Route exact path={ROUTES.RECOVERY_CHANGE}>
+                <RecoveryChange />
+              </Route>
+              <Route exact path={ROUTES.RECOVERY}>
+                <Recovery />
+              </Route>
+              <Route exact path={ROUTES.SIGN_IN}>
+                <SignIn />
+              </Route>
+              <Route exact path={ROUTES.SIGN_UP}>
+                <SignUp />
+              </Route>
+              <Route path={ROUTES.MAIN}>
+                <Home />
+              </Route>
+            </IonRouterOutlet>
+          </IonReactRouter>
+        </IonApp>
+      </ThemeProvider>
+    </ThemeContextProvider>
   );
 };
 
