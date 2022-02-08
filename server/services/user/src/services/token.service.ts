@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Query } from 'mongoose';
 
 import { IToken } from '../interfaces/token/token.interface';
+import { replaceIfPossible } from '../utils/replace';
 
 @Injectable()
 export class TokenService {
@@ -35,7 +36,7 @@ export class TokenService {
   }
 
   public async decodeToken(token: string) {
-    token = token.replace('Bearer ', '');
+    token = replaceIfPossible(token, 'Bearer ', '');
 
     const tokenModel = await this.tokenModel.find({
       token,
