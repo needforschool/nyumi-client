@@ -50,6 +50,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "dev": "ionic serve --lab",
     "dev:ios": "ionic cap run ios -l --external",
     "dev:android": "ionic cap run android -l --external"
   },
