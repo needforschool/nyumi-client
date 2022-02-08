@@ -30,11 +30,21 @@ import RecoveryChange from "./screens/Auth/Recovery/Change";
 import Account from "./screens/Account";
 import Statistic from "./screens/Statistic";
 import Welcome from "./screens/Welcome";
+import React from "react";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const theme = themes.dark;
+  const [theme, setTheme] = React.useState(themes.light);
+
+  React.useEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      setTheme(themes.dark);
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,11 +72,8 @@ const App: React.FC = () => {
             <Route exact path={ROUTES.SIGN_UP}>
               <SignUp />
             </Route>
-            <Route exact path={ROUTES.MAIN}>
+            <Route path={ROUTES.MAIN}>
               <Home />
-            </Route>
-            <Route exact path={ROUTES.MAIN}>
-              <Redirect to={ROUTES.MAIN} />
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>
