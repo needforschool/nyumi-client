@@ -11,25 +11,24 @@ import { TokenService } from "./services/token.service";
 @Module({
   imports: [
     JwtModule.registerAsync({
-      useClass: JwtConfigService
+      useClass: JwtConfigService,
     }),
     MongooseModule.forRootAsync({
       useClass: MongoConfigService,
-      connectionName: 'user-svc-tokens'
+      connectionName: "user-svc-tokens",
     }),
-    MongooseModule.forFeature([
-      {
-        name: 'Token',
-        schema: TokenSchema,
-        collection: 'tokens'
-      }
-    ], 'user-svc-tokens')
+    MongooseModule.forFeature(
+      [
+        {
+          name: "Token",
+          schema: TokenSchema,
+          collection: "tokens",
+        },
+      ],
+      "user-svc-tokens"
+    ),
   ],
-  controllers: [
-    TokenController
-  ],
-  providers: [
-    TokenService
-  ]
+  controllers: [TokenController],
+  providers: [TokenService],
 })
 export class TokenModule {}

@@ -13,26 +13,23 @@ import { ProfileModule } from "./profile.module";
   imports: [
     MongooseModule.forRootAsync({
       useClass: MongoConfigService,
-      connectionName: 'user-svc'
+      connectionName: "user-svc",
     }),
-    MongooseModule.forFeature([
-      {
-        name: 'User',
-        schema: UserSchema,
-        collection: 'users'
-      }
-    ], 'user-svc'),
+    MongooseModule.forFeature(
+      [
+        {
+          name: "User",
+          schema: UserSchema,
+          collection: "users",
+        },
+      ],
+      "user-svc"
+    ),
     TokenModule,
-    ProfileModule
+    ProfileModule,
   ],
-  controllers: [
-    UserController
-  ],
-  providers: [
-    UserService,
-    ConfigService
-  ],
-  exports: []
+  controllers: [UserController],
+  providers: [UserService, ConfigService],
+  exports: [],
 })
-
 export class UserModule {}

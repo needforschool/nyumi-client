@@ -1,16 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model, Query } from 'mongoose';
+import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model, Query } from "mongoose";
 
-import { IToken } from '../interfaces/token/token.interface';
-import { replaceIfPossible } from '../utils/replace';
+import { IToken } from "../interfaces/token/token.interface";
+import { replaceIfPossible } from "../utils/replace";
 
 @Injectable()
 export class TokenService {
   constructor(
     private readonly jwtService: JwtService,
-    @InjectModel('Token') private readonly tokenModel: Model<IToken>,
+    @InjectModel("Token") private readonly tokenModel: Model<IToken>
   ) {}
 
   createToken(userId: string): Promise<IToken> {
@@ -20,7 +20,7 @@ export class TokenService {
       },
       {
         expiresIn: 30 * 24 * 60 * 60,
-      },
+      }
     );
 
     return new this.tokenModel({
@@ -35,8 +35,8 @@ export class TokenService {
     });
   }
 
-  async decodeToken(token: string) {
-    token = replaceIfPossible(token, 'Bearer ', '');
+  async decodeToken(token: string): Promise<{ userId: string } | null> {
+    token = replaceIfPossible(token, "Bearer ", "");
 
     const tokenModel = await this.tokenModel.find({
       token,
@@ -47,7 +47,7 @@ export class TokenService {
       try {
         const tokenData = this.jwtService.decode(tokenModel[0].token) as {
           exp: number;
-          userId: any;
+          userId: unknown;
         };
         if (!tokenData || tokenData.exp <= Math.floor(+new Date() / 1000)) {
           result = null;

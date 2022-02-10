@@ -1,7 +1,7 @@
 import { Transport } from "@nestjs/microservices";
 
 export class ConfigService {
-  private readonly envConfig: { [key: string]: any } = {};
+  private readonly envConfig: { [key: string]: unknown } = {};
 
   constructor() {
     this.envConfig = {};

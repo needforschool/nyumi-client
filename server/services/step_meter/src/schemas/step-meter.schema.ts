@@ -1,6 +1,6 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
-function transformValue(_, ret: { [key: string]: any }) {
+function transformValue(_: unknown, ret: { [key: string]: unknown }) {
   delete ret._id;
 }
 
@@ -8,23 +8,23 @@ export const StepMeterSchema = new mongoose.Schema(
   {
     user_id: {
       type: String,
-      required: [true, 'User can not be empty'],
+      required: [true, "User can not be empty"],
     },
     step_count: {
       type: Number,
-      required: [true, 'Step count can not be empty'],
+      required: [true, "Step count can not be empty"],
       default: 0,
     },
     distance: {
       type: Number,
-      required: [true, 'Distance can not be empty'],
+      required: [true, "Distance can not be empty"],
       default: 0,
     },
     climbed_floors: {
       type: Number,
-      required: [true, 'Climbed floors can not be empty'],
+      required: [true, "Climbed floors can not be empty"],
       default: 0,
-    }
+    },
   },
   {
     toObject: {
@@ -37,5 +37,5 @@ export const StepMeterSchema = new mongoose.Schema(
       versionKey: false,
       transform: transformValue,
     },
-  },
+  }
 );

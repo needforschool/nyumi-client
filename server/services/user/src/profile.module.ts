@@ -11,23 +11,21 @@ import { ProfileService } from "./services/profile.service";
   imports: [
     MongooseModule.forRootAsync({
       useClass: MongoConfigService,
-      connectionName: 'profile-svc'
+      connectionName: "profile-svc",
     }),
-    MongooseModule.forFeature([
-      {
-        name: 'Profile',
-        schema: ProfileSchema,
-        collection: 'profiles'
-      }
-    ], 'profile-svc')
+    MongooseModule.forFeature(
+      [
+        {
+          name: "Profile",
+          schema: ProfileSchema,
+          collection: "profiles",
+        },
+      ],
+      "profile-svc"
+    ),
   ],
-  controllers: [
-    ProfileController
-  ],
-  providers: [
-    ConfigService,
-    ProfileService
-  ],
-  exports: []
+  controllers: [ProfileController],
+  providers: [ConfigService, ProfileService],
+  exports: [],
 })
 export class ProfileModule {}

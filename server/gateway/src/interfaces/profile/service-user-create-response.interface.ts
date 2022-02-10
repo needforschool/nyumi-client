@@ -4,5 +4,5 @@ export interface IServiceProfileCreateResponse {
   status: number;
   message: string;
   profile: IProfile | null;
-  errors: { [key: string]: any };
+  errors: { [key: string]: unknown };
 }

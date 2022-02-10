@@ -1,5 +1,5 @@
 export class ConfigService {
-  private readonly envConfig: { [key: string]: any } = null;
+  private readonly envConfig: { [key: string]: unknown } = {};
 
   constructor() {
     this.envConfig = {
@@ -9,7 +9,7 @@ export class ConfigService {
     this.envConfig.gatewayPort = process.env.API_GATEWAY_PORT;
   }
 
-  get(key: string): any {
+  get(key: string): unknown {
     return this.envConfig[key];
   }
 }
