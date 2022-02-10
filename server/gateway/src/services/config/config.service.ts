@@ -8,8 +8,8 @@ export class ConfigService {
     this.envConfig.port = process.env.API_GATEWAY_PORT || 8080;
     this.envConfig.userService = {
       options: {
-        port: process.env.USER_SERVICE_PORT,
         host: process.env.USER_SERVICE_HOST,
+        port: process.env.USER_SERVICE_PORT,
       },
       transport: Transport.TCP,
     };

@@ -1,7 +1,7 @@
 import Page from "../../components/Page";
 
 const Home: React.FC = () => {
-  return <Page title={"Home"}>hey</Page>;
+  return <Page>Home Screen</Page>;
 };
 
 export default Home;
