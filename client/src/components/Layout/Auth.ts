@@ -38,13 +38,14 @@ export const AuthStepHeader = styled.div`
 `;
 
 export const AuthStepTitle = styled.h2`
-  font-size: ${({ theme }) => theme.size.medium};
+  font-size: ${({ theme }) => theme.size.large};
   font-weight: ${({ theme }) => theme.weight.semiBold};
 `;
 export const AuthStepDescription = styled.p`
   margin-top: 5px;
-  font-size: ${({ theme }) => theme.size.tiny};
+  font-size: ${({ theme }) => theme.size.normal};
   color: ${({ theme }) => theme.colors.text.light};
+  font-weight: ${({ theme }) => theme.weight.semiBold};
 `;
 
 export const AuthForm = styled.form`
@@ -52,6 +53,7 @@ export const AuthForm = styled.form`
   flex-direction: column;
   width: 100%;
   padding: 0 10px;
+  margin-top: 10px;
 `;
 
 export const FieldGroup = styled.div`
@@ -89,7 +91,9 @@ export const AuthButton = styled(Button)<{
   valid?: boolean;
 }>`
   margin-top: 10px;
-  font-size: ${({ theme }) => theme.size.small};
+  font-size: ${({ theme }) => theme.size.normal};
+  height: 40px;
+  font-weight: ${({ theme }) => theme.weight.semiBold};
 
   ${({ valid }) =>
     !valid &&
