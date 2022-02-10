@@ -16,7 +16,6 @@ export const ProfileSchema = new mongoose.Schema(
     },
     last_name: {
       type: String,
-      required: [true, 'Last name can not be empty'],
     },
   },
   {

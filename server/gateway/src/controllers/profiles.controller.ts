@@ -1,11 +1,13 @@
 import { Controller, Get, Inject, Param } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
+import { ApiTags } from "@nestjs/swagger";
 import { GetAllProfilesResponseDto } from "interfaces/profile/dto/response/get-all-profiles-reponse.dto";
 import { GetProfileByIdReponseDto } from "interfaces/profile/dto/response/get-profile-by-id-response.dto";
 
 import { Auth } from "../common/decorators/auth.decorator";
 import { Role } from "../common/enums/role.enum";
 
+@ApiTags("profiles")
 @Controller('profiles')
 export class ProfilesController {
   constructor(

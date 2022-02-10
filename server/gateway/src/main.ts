@@ -10,7 +10,6 @@ const bootstrap = async () => {
   const config = new DocumentBuilder()
     .setTitle('Nyumi API')
     .setVersion('0.0.1')
-    .addTag('nyumi')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

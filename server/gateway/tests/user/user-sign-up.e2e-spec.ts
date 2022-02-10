@@ -14,7 +14,7 @@ describe('Users Sign Up (e2e)', () => {
   let app;
 
   afterAll(async () => {
-    await mongoose.connect(process.env.MONGO_DSN, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGO_DSN);
     await mongoose.connection.dropDatabase();
   });
 

@@ -21,7 +21,7 @@
         "import/extensions" : [0],
         "indent"            : ["error", 2],
         "semi"              : ["error", "always"],
-        "quotes"            : ["error", "single"],
+        "quotes"            : ["error", "double"],
         "no-console"        : 0
     }
   }

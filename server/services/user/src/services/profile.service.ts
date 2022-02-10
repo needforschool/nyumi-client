@@ -20,7 +20,7 @@ export class ProfileService {
 
   async updateProfileById(
     id: string,
-    userParams: { firstName: string, lastName: string },
+    userParams: { firstName: string, lastName?: string },
   ): Promise<IProfile> {
     return this.profileModel.findByIdAndUpdate(id, userParams, { runValidators: true }).exec();
   }

@@ -3,9 +3,10 @@ import { IProfile } from "interfaces/profile/profile.interface";
 
 import { IUser } from '../../user.interface';
 
-export interface CreateUserResponseDto extends ResponseDto {
+export type CreateUserResponseDto = ResponseDto & {
   data: {
     user: IUser;
+    profile: IProfile;
     token: string;
   };
 }
