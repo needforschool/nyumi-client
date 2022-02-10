@@ -1,4 +1,4 @@
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./screens/Home";
@@ -21,7 +21,6 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import { ThemeProvider } from "styled-components";
-import themes from "./services/themes";
 import SignUp from "./screens/Auth/SignUp";
 import ROUTES from "./constants/routes";
 import SignIn from "./screens/Auth/SignIn";
@@ -33,6 +32,7 @@ import Welcome from "./screens/Welcome";
 import React from "react";
 import useThemeDetector from "./hooks/useThemeDetector";
 import GlobalStyle from "./components/Layout/GlobalStyle";
+import themes from "./services/themes";
 
 setupIonicReact();
 
