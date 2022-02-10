@@ -84,8 +84,9 @@ export const Container = styled.input<{ error?: string }>`
   border: 1px solid ${({ theme }) => theme.colors.layout.darkest};
   outline: none;
   border-radius: 6px;
-  font-size: ${({ theme }) => theme.size.small};
+  font-size: ${({ theme }) => theme.size.normal};
   width: 100%;
+  height: 40px;
 
   :focus {
     border: 1px solid ${({ theme }) => theme.colors.accent.light};
