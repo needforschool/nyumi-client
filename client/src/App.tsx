@@ -32,6 +32,7 @@ import Welcome from "./screens/Welcome";
 import React from "react";
 import useThemeDetector from "./hooks/useThemeDetector";
 import GlobalStyle from "./components/Layout/GlobalStyle";
+import themes from "./services/themes";
 
 setupIonicReact();
 
