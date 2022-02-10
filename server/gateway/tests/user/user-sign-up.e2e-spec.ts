@@ -13,12 +13,7 @@ import { userSignupRequestSuccess } from '../mocks/user-signup-request-success.m
 describe('Users Sign Up (e2e)', () => {
   let app;
 
-  afterAll(async () => {
-    await mongoose.connect(process.env.MONGO_DSN);
-    await mongoose.connection.dropDatabase();
-  });
-
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -32,7 +27,7 @@ describe('Users Sign Up (e2e)', () => {
   });
 
   it('/auth/register (POST) - should not create user without request body', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send()
       .expect(412)
@@ -59,12 +54,12 @@ describe('Users Sign Up (e2e)', () => {
             path: 'email',
           },
         },
-      })
-      .end(done);
+      });
+    done();
   });
 
   it('/auth/register (POST) - should not create a user if request body is string', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send('test')
       .expect((res) => {
@@ -90,12 +85,12 @@ describe('Users Sign Up (e2e)', () => {
             path: 'email',
           },
         },
-      })
-      .end(done);
+      });
+    done();
   });
 
   it('/auth/register (POST) - should not create user without password', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send(userSignupRequestFailNoPw)
       .expect(412)
@@ -114,12 +109,12 @@ describe('Users Sign Up (e2e)', () => {
             path: 'password',
           },
         },
-      })
-      .end(done);
+      });
+    done();
   });
 
   it('/auth/register (POST) - should not create user if password is short', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send(userSignupRequestFailShortPw)
       .expect(412)
@@ -139,12 +134,12 @@ describe('Users Sign Up (e2e)', () => {
             value: userSignupRequestFailShortPw.password,
           },
         },
-      })
-      .end(done);
+      });
+    done();
   });
 
   it('/auth/register (POST) - should not create user without email', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send({
         password: 'test111',
@@ -165,12 +160,12 @@ describe('Users Sign Up (e2e)', () => {
             path: 'email',
           },
         },
-      })
-      .end(done);
+      });
+    done();
   });
 
   it('/auth/register (POST) - should not create user with invalid email', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send(userSignupRequestFailInvalidEmail)
       .expect(412)
@@ -190,17 +185,19 @@ describe('Users Sign Up (e2e)', () => {
             value: userSignupRequestFailInvalidEmail.email,
           },
         },
-      })
-      .end(done);
+      });
+    done();
   });
 
   it('/auth/register (POST) - should create a valid user', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send(userSignupRequestSuccess)
       .expect(201)
       .expect((res) => {
         res.body.data.user.id = 'fake_value';
+        res.body.data.profile.id = 'fake_value';
+        res.body.data.profile.user_id = 'fake_value';
         res.body.data.token = 'fake_value';
       })
       .expect({
@@ -211,15 +208,20 @@ describe('Users Sign Up (e2e)', () => {
             email: userSignupRequestSuccess.email,
             id: 'fake_value'
           },
+          profile: {
+            id: 'fake_value',
+            user_id: 'fake_value',
+            first_name: 'Jijon',
+          },
           token: 'fake_value'
         },
         errors: null
-      })
-      .end(done);
+      });
+    done();
   });
 
   it('/auth/register (POST) - should not create user with existing email', (done) => {
-    return request(app.getHttpServer())
+    request(app.getHttpServer())
       .post('/auth/register')
       .send(userSignupRequestSuccess)
       .expect(409)
@@ -232,7 +234,7 @@ describe('Users Sign Up (e2e)', () => {
             path: 'email',
           },
         },
-      })
-      .end(done);
+      });
+    done();
   });
 });

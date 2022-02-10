@@ -12,12 +12,7 @@ import {
 describe('Users Sign In (e2e)', () => {
   let app;
 
-  afterAll(async () => {
-    await mongoose.connect(process.env.MONGO_DSN);
-    await mongoose.connection.dropDatabase();
-  });
-
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -35,12 +30,12 @@ describe('Users Sign In (e2e)', () => {
    * @When
    * @Then returns created user
    */
-  it('/auth/register (POST) - should create a valid user', (done) => {
-    return request(app.getHttpServer())
+  test('/auth/register (POST) - should create a valid user', (done) => {
+    request(app.getHttpServer())
       .post('/auth/register')
       .send(userSignupRequestSuccess)
-      .expect(201)
-      .end(done);
+      .expect(201);
+    done();
   });
 
   /**
@@ -48,8 +43,8 @@ describe('Users Sign In (e2e)', () => {
    * @When email is wrong
    * @Then returns error
    */
-  it('/auth/login (POST) - should not create a token for invalid email', (done) => {
-    return request(app.getHttpServer())
+   test('/auth/login (POST) - should not create a token for invalid email', (done) => {
+    request(app.getHttpServer())
       .post('/auth/login')
       .send(userLoginRequestFailWrongEmail)
       .expect(401)
@@ -57,12 +52,12 @@ describe('Users Sign In (e2e)', () => {
         message: 'user_search_by_credentials_not_found',
         data: null,
         errors: null,
-      })
-      .end(done);
+      });
+    done();
   });
 
-  it('/auth/login (POST) - should not create a token for invalid password', (done) => {
-    return request(app.getHttpServer())
+  test('/auth/login (POST) - should not create a token for invalid password', (done) => {
+    request(app.getHttpServer())
       .post('/auth/login')
       .send(userLoginRequestFailWrongPw)
       .expect(401)
@@ -70,12 +65,12 @@ describe('Users Sign In (e2e)', () => {
         message: 'user_search_by_credentials_not_match',
         data: null,
         errors: null,
-      })
-      .end(done);
+      });
+      done();
   });
 
-  it('/auth/login (POST) - should not create a token for empty body', (done) => {
-    return request(app.getHttpServer())
+  test('/auth/login (POST) - should not create a token for empty body', (done) => {
+    request(app.getHttpServer())
       .post('/auth/login')
       .send()
       .expect(401)
@@ -83,12 +78,12 @@ describe('Users Sign In (e2e)', () => {
         message: 'user_search_by_credentials_not_found',
         data: null,
         errors: null,
-      })
-      .end(done);
+      });
+    done();
   });
 
-  it('/auth/login (POST) - should not create a token for string value in body', (done) => {
-    return request(app.getHttpServer())
+  test('/auth/login (POST) - should not create a token for string value in body', (done) => {
+    request(app.getHttpServer())
       .post('/auth/login')
       .send(userSignupRequestSuccess.email)
       .expect(401)
@@ -96,12 +91,12 @@ describe('Users Sign In (e2e)', () => {
         message: 'user_search_by_credentials_not_found',
         data: null,
         errors: null,
-      })
-      .end(done);
+      });
+    done();
   });
 
-  it('/auth/login (POST) - should create a token for valid credentials', (done) => {
-    return request(app.getHttpServer())
+  test('/auth/login (POST) - should create a token for valid credentials', (done) => {
+    request(app.getHttpServer())
       .post('/auth/login')
       .send(userSignupRequestSuccess)
       .expect(201)
@@ -120,7 +115,7 @@ describe('Users Sign In (e2e)', () => {
           token: 'fake_value'
         },
         errors: null
-      })
-      .end(done);
+      });
+    done();
   });
 });
