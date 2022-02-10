@@ -12,9 +12,6 @@ export const AuthContainer = styled.div`
 `;
 
 export const AuthHeader = styled.div`
-  position: absolute;
-  top: 15px;
-  left: 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,28 +25,33 @@ export const AuthBrandImage = styled.img`
 
 export const AuthTitle = styled.h1`
   margin: 15px 0;
-  font-size: ${({ theme }) => theme.size.medium};
+  font-size: ${({ theme }) => theme.size.title};
   font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
 export const AuthStepHeader = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
-  max-width: 210px;
-  align-items: center;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
 `;
 
 export const AuthStepTitle = styled.h2`
-  font-weight: ${({ theme }) => theme.weight.medium};
+  font-size: ${({ theme }) => theme.size.medium};
+  font-weight: ${({ theme }) => theme.weight.semiBold};
+`;
+export const AuthStepDescription = styled.p`
+  margin-top: 5px;
+  font-size: ${({ theme }) => theme.size.tiny};
+  color: ${({ theme }) => theme.colors.text.light};
 `;
 
 export const AuthForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 210px;
-  padding: 0 15px;
+  padding: 0 10px;
 `;
 
 export const FieldGroup = styled.div`
@@ -78,7 +80,7 @@ export const FieldContainer = styled.div`
 
 export const AuthLink = styled(Link)`
   color: ${({ theme }) => theme.colors.text.light};
-  font-size: ${({ theme }) => theme.size.small};
+  font-size: ${({ theme }) => theme.size.tiny};
   margin-top: 10px;
 `;
 
