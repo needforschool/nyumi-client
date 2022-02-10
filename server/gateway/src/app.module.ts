@@ -13,31 +13,26 @@ import { AuthController } from "./controllers/auth.controller";
 
 @Module({
   imports: [],
-  controllers: [
-    AuthController,
-    UsersController,
-    ProfilesController
-  ],
+  controllers: [AuthController, UsersController, ProfilesController],
   providers: [
     ConfigService,
     {
-      provide: 'USER_SERVICE',
+      provide: "USER_SERVICE",
       useFactory: (configService: ConfigService) => {
-        const userServiceOptions = configService.get('userService');
+        const userServiceOptions = configService.get("userService");
         return ClientProxyFactory.create(userServiceOptions);
       },
       inject: [ConfigService],
     },
     {
       provide: APP_GUARD,
-      useClass: AuthenticationGuard
+      useClass: AuthenticationGuard,
     },
     {
       provide: APP_GUARD,
-      useClass: PermissionGuard
-    }
+      useClass: PermissionGuard,
+    },
   ],
-  exports: []
+  exports: [],
 })
-
 export class AppModule {}

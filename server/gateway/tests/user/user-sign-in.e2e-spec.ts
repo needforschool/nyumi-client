@@ -1,16 +1,16 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import * as request from 'supertest';
-import * as mongoose from 'mongoose';
+import { Test, TestingModule } from "@nestjs/testing";
+import request from "supertest";
 
-import { AppModule } from '../../src/app.module';
-import { userSignupRequestSuccess } from '../mocks/user-signup-request-success.mock';
+import { AppModule } from "../../src/app.module";
+import { userSignupRequestSuccess } from "../mocks/user-signup-request-success.mock";
 import {
   userLoginRequestFailWrongPw,
   userLoginRequestFailWrongEmail,
-} from '../mocks/user-login-request-fail.mock';
+} from "../mocks/user-login-request-fail.mock";
+import { INestApplication } from "@nestjs/common";
 
-describe('Users Sign In (e2e)', () => {
-  let app;
+describe("Users Sign In (e2e)", () => {
+  let app: INestApplication;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -30,9 +30,9 @@ describe('Users Sign In (e2e)', () => {
    * @When
    * @Then returns created user
    */
-  test('/auth/register (POST) - should create a valid user', (done) => {
+  test("/auth/register (POST) - should create a valid user", (done) => {
     request(app.getHttpServer())
-      .post('/auth/register')
+      .post("/auth/register")
       .send(userSignupRequestSuccess)
       .expect(201);
     done();
@@ -43,78 +43,74 @@ describe('Users Sign In (e2e)', () => {
    * @When email is wrong
    * @Then returns error
    */
-   test('/auth/login (POST) - should not create a token for invalid email', (done) => {
+  test("/auth/login (POST) - should not create a token for invalid email", (done) => {
     request(app.getHttpServer())
-      .post('/auth/login')
+      .post("/auth/login")
       .send(userLoginRequestFailWrongEmail)
       .expect(401)
       .expect({
-        message: 'user_search_by_credentials_not_found',
+        message: "user_search_by_credentials_not_found",
         data: null,
         errors: null,
       });
     done();
   });
 
-  test('/auth/login (POST) - should not create a token for invalid password', (done) => {
+  test("/auth/login (POST) - should not create a token for invalid password", (done) => {
     request(app.getHttpServer())
-      .post('/auth/login')
+      .post("/auth/login")
       .send(userLoginRequestFailWrongPw)
       .expect(401)
       .expect({
-        message: 'user_search_by_credentials_not_match',
-        data: null,
-        errors: null,
-      });
-      done();
-  });
-
-  test('/auth/login (POST) - should not create a token for empty body', (done) => {
-    request(app.getHttpServer())
-      .post('/auth/login')
-      .send()
-      .expect(401)
-      .expect({
-        message: 'user_search_by_credentials_not_found',
+        message: "user_search_by_credentials_not_match",
         data: null,
         errors: null,
       });
     done();
   });
 
-  test('/auth/login (POST) - should not create a token for string value in body', (done) => {
+  test("/auth/login (POST) - should not create a token for empty body", (done) => {
+    request(app.getHttpServer()).post("/auth/login").send().expect(401).expect({
+      message: "user_search_by_credentials_not_found",
+      data: null,
+      errors: null,
+    });
+    done();
+  });
+
+  test("/auth/login (POST) - should not create a token for string value in body", (done) => {
     request(app.getHttpServer())
-      .post('/auth/login')
+      .post("/auth/login")
       .send(userSignupRequestSuccess.email)
       .expect(401)
       .expect({
-        message: 'user_search_by_credentials_not_found',
+        message: "user_search_by_credentials_not_found",
         data: null,
         errors: null,
       });
     done();
   });
 
-  test('/auth/login (POST) - should create a token for valid credentials', (done) => {
+  test("/auth/login (POST) - should create a token for valid credentials", (done) => {
     request(app.getHttpServer())
-      .post('/auth/login')
+      .post("/auth/login")
       .send(userSignupRequestSuccess)
       .expect(201)
       .expect((res) => {
-        res.body.data.user.id = 'fake_value';
-        res.body.data.token = 'fake_value';
+        res.body.data.user.id = "fake_value";
+        res.body.data.token = "fake_value";
       })
       .expect({
-        message: 'token_create_success',
+        message: "token_create_success",
         data: {
           user: {
-            role: 'user',
+            role: "user",
             email: userSignupRequestSuccess.email,
-            id: 'fake_value'
+            id: "fake_value",
           },
-          token: 'fake_value'
+          token: "fake_value",
         },
-        errors: null
+        errors: null,
       });
     done();
   });

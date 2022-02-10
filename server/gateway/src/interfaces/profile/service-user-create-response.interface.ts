@@ -1,4 +1,4 @@
-import { IProfile } from './profile.interface';
+import { IProfile } from "./profile.interface";
 
 export interface IServiceProfileCreateResponse {
   status: number;

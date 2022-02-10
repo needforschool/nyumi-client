@@ -1,7 +1,7 @@
 import { ResponseDto } from "common/interface/dto/response.dto";
 import { IProfile } from "interfaces/profile/profile.interface";
 
-import { IUser } from '../../user.interface';
+import { IUser } from "../../user.interface";
 
 export type CreateUserResponseDto = ResponseDto & {
   data: {
@@ -9,4 +9,4 @@ export type CreateUserResponseDto = ResponseDto & {
     profile: IProfile;
     token: string;
   };
-}
+};

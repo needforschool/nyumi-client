@@ -15,6 +15,16 @@ export const StepMeterSchema = new mongoose.Schema(
       required: [true, 'Step count can not be empty'],
       default: 0,
     },
+    distance: {
+      type: Number,
+      required: [true, 'Distance can not be empty'],
+      default: 0,
+    },
+    climbed_floors: {
+      type: Number,
+      required: [true, 'Climbed floors can not be empty'],
+      default: 0,
+    }
   },
   {
     toObject: {

@@ -4,7 +4,7 @@ import { IUser } from "../../user.interface";
 
 export interface LoginUserResponseDto extends ResponseDto {
   data: {
-      user: IUser;
-      token: string;
+    user: IUser;
+    token: string;
   };
 }

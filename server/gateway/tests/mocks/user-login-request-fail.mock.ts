@@ -1,4 +1,4 @@
-import { userSignupRequestSuccess } from './user-signup-request-success.mock';
+import { userSignupRequestSuccess } from "./user-signup-request-success.mock";
 
 export const userLoginRequestFailWrongPw = {
   ...userSignupRequestSuccess,
@@ -7,5 +7,5 @@ export const userLoginRequestFailWrongPw = {
 
 export const userLoginRequestFailWrongEmail = {
   ...userSignupRequestSuccess,
-  email: 'failed' + userSignupRequestSuccess.email,
+  email: "failed" + userSignupRequestSuccess.email,
 };
