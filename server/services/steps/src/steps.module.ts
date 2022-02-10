@@ -8,11 +8,11 @@ import { MongoConfigService } from "./services/config/mongo-config.service";
   imports: [
     MongooseModule.forRootAsync({
       useClass: MongoConfigService,
-      connectionName: "step_meter-svc",
+      connectionName: "steps-svc",
     }),
   ],
   controllers: [],
   providers: [ConfigService],
   exports: [],
 })
-export class StepMeterModule {}
+export class StepsModule {}

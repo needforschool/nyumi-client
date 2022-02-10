@@ -41,13 +41,13 @@ export class TokenService {
     const tokenModel = await this.tokenModel.find({
       token,
     });
-    let result = null;
+    let result: { userId: string } | null = null;
 
     if (tokenModel && tokenModel[0]) {
       try {
         const tokenData = this.jwtService.decode(tokenModel[0].token) as {
           exp: number;
-          userId: unknown;
+          userId: any;
         };
         if (!tokenData || tokenData.exp <= Math.floor(+new Date() / 1000)) {
           result = null;
@@ -60,6 +60,7 @@ export class TokenService {
         result = null;
       }
     }
+
     return result;
   }
 }

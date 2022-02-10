@@ -2,10 +2,10 @@ import { NestFactory } from "@nestjs/core";
 import { TcpOptions, Transport } from "@nestjs/microservices";
 
 import { ConfigService } from "./services/config/config.service";
-import { StepMeterModule } from "./step-meter.module";
+import { StepsModule } from "./steps.module";
 
 const bootstrap = async () => {
-  const app = await NestFactory.createMicroservice(StepMeterModule, {
+  const app = await NestFactory.createMicroservice(StepsModule, {
     transport: Transport.TCP,
     options: {
       host: "0.0.0.0",

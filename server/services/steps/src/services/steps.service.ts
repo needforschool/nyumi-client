@@ -5,13 +5,13 @@ import { Model } from "mongoose";
 import { IStepMeter } from "../interfaces/step-meter.interface";
 
 @Injectable()
-export class StepMeterService {
+export class StepsService {
   constructor(
     @InjectModel("StepMeter") private readonly model: Model<IStepMeter>
   ) {}
 
-  async searchStepMeters(params: { userId?: string }): Promise<IStepMeter[]> {
-    return this.model.find(params).exec();
+  async searchStepMeters(params?: { userId?: string }): Promise<IStepMeter[]> {
+    return this.model.find(params || {}).exec();
   }
 
   async searchStepMeterById(id: string): Promise<IStepMeter | null> {

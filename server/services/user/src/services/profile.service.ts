@@ -10,12 +10,12 @@ export class ProfileService {
     @InjectModel("Profile") private readonly profileModel: Model<IProfile>
   ) {}
 
-  async searchProfile(params: {
+  async searchProfile(params?: {
     userId: string;
     firstName?: string;
     lastName?: string;
   }): Promise<IProfile[]> {
-    return this.profileModel.find(params).exec();
+    return this.profileModel.find(params || {}).exec();
   }
 
   async searchProfileById(id: string): Promise<IProfile | null> {

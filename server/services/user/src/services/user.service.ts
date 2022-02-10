@@ -8,8 +8,8 @@ import { IUser } from "../interfaces/user/user.interface";
 export class UserService {
   constructor(@InjectModel("User") private readonly userModel: Model<IUser>) {}
 
-  async searchUser(params: { email?: string }): Promise<IUser[]> {
-    return this.userModel.find(params).exec();
+  async searchUser(params?: { email?: string }): Promise<IUser[]> {
+    return this.userModel.find(params || {}).exec();
   }
 
   async searchUserById(id: string): Promise<IUser | null> {

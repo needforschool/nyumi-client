@@ -4,11 +4,11 @@ import { MessagePattern } from "@nestjs/microservices";
 import { IStepMeterResponse } from "../interfaces/step-meter-response.interface";
 import { IStepMeter } from "../interfaces/step-meter.interface";
 import { IStepMetersResponse } from "../interfaces/step-meters-response.interface";
-import { StepMeterService } from "../services/step-meter.service";
+import { StepsService } from "../services/steps.service";
 
 @Controller("step-meter")
 export class StepMeterController {
-  constructor(private readonly service: StepMeterService) {}
+  constructor(private readonly service: StepsService) {}
 
   @MessagePattern("get_all")
   async getAllStepMeters(): Promise<IStepMetersResponse> {
