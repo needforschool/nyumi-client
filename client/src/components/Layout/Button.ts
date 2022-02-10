@@ -9,8 +9,8 @@ export default styled.button<{ outline?: boolean }>`
     if (props.outline) return props.theme.colors.text.lightest;
     return props.theme.colors.text.darkest;
   }};
-  padding: 12px 24px;
-  border-radius: 10px;
+  padding: 8px 16px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
