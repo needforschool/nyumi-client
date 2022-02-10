@@ -4,7 +4,7 @@ const dark: Theme = {
   id: 0,
   colors: {
     layout: {
-      darkest: "rgb(0, 0, 0)",
+      darkest: "rgb(24, 25, 26)",
       darker: "rgb(30, 31, 32)",
       dark: "rgb(75, 75, 76)",
       light: "rgb(30, 30, 30)",
@@ -21,6 +21,8 @@ const dark: Theme = {
     },
     accent: {
       light: "rgb(255, 255, 255)",
+      red: "rgb(214, 48, 49)",
+      green: "rgb(38, 222, 129)",
     },
   },
 };
