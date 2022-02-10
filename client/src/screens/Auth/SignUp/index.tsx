@@ -4,7 +4,6 @@ import {
   AuthContainer,
   AuthForm,
   AuthHeader,
-  AuthLink,
   AuthStepDescription,
   AuthStepHeader,
   AuthStepTitle,
@@ -13,9 +12,8 @@ import {
   FieldGroup,
 } from "../../../components/Layout/Auth";
 import Page from "../../../components/Page";
-import ROUTES from "../../../constants/routes";
 
-const Home: React.FC = () => {
+const SignUp: React.FC = () => {
   return (
     <Page>
       <AuthContainer>
@@ -23,12 +21,24 @@ const Home: React.FC = () => {
           <AuthTitle>Nyumi</AuthTitle>
         </AuthHeader>
         <AuthStepHeader>
-          <AuthStepTitle>Bienvenue,</AuthStepTitle>
+          <AuthStepTitle>Commençons</AuthStepTitle>
           <AuthStepDescription>
-            Connecte toi pour accéder à l’application
+            Nous avons besoin de mieux vous connaître
           </AuthStepDescription>
         </AuthStepHeader>
         <AuthForm>
+          <FieldGroup>
+            <FieldContainer>
+              <Field
+                type="text"
+                id="firstname"
+                name="firstname"
+                placeholder="Prénom"
+                autoFocus
+                required
+              />
+            </FieldContainer>
+          </FieldGroup>
           <FieldGroup>
             <FieldContainer>
               <Field
@@ -45,23 +55,16 @@ const Home: React.FC = () => {
             <FieldContainer>
               <Field
                 type="password"
-                id="empasswordail"
+                id="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Mot de passe"
                 autoFocus
                 required
               />
             </FieldContainer>
           </FieldGroup>
           <FieldGroup>
-            <AuthButton type={"submit"}>{"Se connecter"}</AuthButton>
-            <AuthButton type={"submit"} outline>
-              {"S'enregistrer"}
-            </AuthButton>
-
-            <AuthLink href={ROUTES.RECOVERY}>
-              {"Mot de passe oublié ?"}
-            </AuthLink>
+            <AuthButton type={"submit"}>{"S'enregistrer"}</AuthButton>
           </FieldGroup>
         </AuthForm>
       </AuthContainer>
@@ -69,4 +72,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default SignUp;
