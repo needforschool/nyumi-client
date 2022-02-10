@@ -17,7 +17,7 @@ export type Theme = {
       darker: string;
       darkest: string;
     };
-    accent: { light: string };
+    accent: { light: string; red: string; green: string };
   };
 };
 
