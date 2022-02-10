@@ -12,6 +12,6 @@ const bootstrap = async () => {
       port: new ConfigService().get('port')
     }
   } as TcpOptions);
-  await app.listenAsync();
+  await app.listen();
 };
 bootstrap();

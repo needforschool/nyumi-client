@@ -13,7 +13,7 @@ export class TokenService {
     @InjectModel('Token') private readonly tokenModel: Model<IToken>,
   ) {}
 
-  public createToken(userId: string): Promise<IToken> {
+  createToken(userId: string): Promise<IToken> {
     const token = this.jwtService.sign(
       {
         userId,
@@ -29,13 +29,13 @@ export class TokenService {
     }).save();
   }
 
-  public deleteTokenForUserId(userId: string): Query<any, any> {
+  deleteTokenForUserId(userId: string): Query<any, any> {
     return this.tokenModel.remove({
       user_id: userId,
     });
   }
 
-  public async decodeToken(token: string) {
+  async decodeToken(token: string) {
     token = replaceIfPossible(token, 'Bearer ', '');
 
     const tokenModel = await this.tokenModel.find({

@@ -10,22 +10,22 @@ export class UserService {
     @InjectModel('User') private readonly userModel: Model<IUser>,
   ) {}
 
-  public async searchUser(params?: { email?: string }): Promise<IUser[]> {
+  async searchUser(params?: { email?: string }): Promise<IUser[]> {
     return this.userModel.find(params).exec();
   }
 
-  public async searchUserById(id: string): Promise<IUser> {
+  async searchUserById(id: string): Promise<IUser> {
     return this.userModel.findById(id).exec();
   }
 
-  public async updateUserById(
+  async updateUserById(
     id: string,
     userParams: { is_confirmed: boolean },
   ): Promise<IUser> {
-    return this.userModel.updateOne({ _id: id }, userParams).exec();
+    return this.userModel.findByIdAndUpdate(id, userParams, { runValidators: true }).exec();
   }
 
-  public async createUser(user: IUser): Promise<IUser> {
+  async createUser(user: IUser): Promise<IUser> {
     const userModel = new this.userModel(user);
     return await userModel.save();
   }

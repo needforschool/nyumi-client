@@ -10,22 +10,22 @@ export class ProfileService {
     @InjectModel('Profile') private readonly profileModel: Model<IProfile>,
   ) {}
 
-  public async searchProfile(params?: { userId: string, firstName?: string, lastName?: string }): Promise<IProfile[]> {
+  async searchProfile(params?: { userId: string, firstName?: string, lastName?: string }): Promise<IProfile[]> {
     return this.profileModel.find(params).exec();
   }
 
-  public async searchProfileById(id: string): Promise<IProfile> {
+  async searchProfileById(id: string): Promise<IProfile> {
     return this.profileModel.findById(id).exec();
   }
 
-  public async updateProfileById(
+  async updateProfileById(
     id: string,
     userParams: { firstName: string, lastName: string },
   ): Promise<IProfile> {
-    return this.profileModel.updateOne({ _id: id }, userParams).exec();
+    return this.profileModel.findByIdAndUpdate(id, userParams, { runValidators: true }).exec();
   }
 
-  public async createProfile(profile: IProfile): Promise<IProfile> {
+  async createProfile(profile: IProfile): Promise<IProfile> {
     const userModel = new this.profileModel(profile);
     return await userModel.save();
   }
