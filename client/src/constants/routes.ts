@@ -2,6 +2,7 @@ const ROUTES = {
   MAIN: "/",
   ACCOUNT: "/account",
   WELCOME: "/welcome",
+  GOAL: "/goal",
   STATISTICS: "/statistics",
 
   /* AUTH */
