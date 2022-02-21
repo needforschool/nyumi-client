@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ children }: Props) => {
-  console.log(children);
   return <Container>{children}</Container>;
 };
 
