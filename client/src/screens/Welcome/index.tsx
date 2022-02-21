@@ -1,39 +1,39 @@
 import Page from "../../components/Page";
 import styled from "styled-components";
 
-const Welcome: React.FC = () => {
+const come: React.FC = () => {
   return (
     <Page>
-      <WelContainer>
-        <WelHeader>
-          <WelTitle>Mes Objectif</WelTitle>
-          <WelSubtitle>Choisir mes objectifs</WelSubtitle>
-        </WelHeader>
-        <WelObjectifs>
-          <WelObjectif>
-            <Welname>Nombre de pas par jour</Welname>
-            <Welcube>2500</Welcube>
-          </WelObjectif>
-          <WelObjectif>
-            <Welname>Nombre de cigarettes par jour</Welname>
-            <Welcube>5</Welcube>
-          </WelObjectif>
-          <WelObjectif>
-            <Welname>Nombre de pas par jour</Welname>
-            <Welcube>2500</Welcube>
-          </WelObjectif>
-          <WelObjectif>
-            <Welname>Nombre de cigarettes par jour</Welname>
-            <Welcube>5</Welcube>
-          </WelObjectif>
-        </WelObjectifs>
-        <WelBtn>Démarrer l’expérience !</WelBtn>
-      </WelContainer>
+      <Container>
+        <Header>
+          <Title>Mes Objectif</Title>
+          <Subtitle>Choisir mes objectifs</Subtitle>
+        </Header>
+        <Objectifs>
+          <Objectif>
+            <Name>Nombre de pas par jour</Name>
+            <Cube>2500</Cube>
+          </Objectif>
+          <Objectif>
+            <Name>Nombre de cigarettes par jour</Name>
+            <Cube>5</Cube>
+          </Objectif>
+          <Objectif>
+            <Name>Nombre de pas par jour</Name>
+            <Cube>2500</Cube>
+          </Objectif>
+          <Objectif>
+            <Name>Nombre de cigarettes par jour</Name>
+            <Cube>5</Cube>
+          </Objectif>
+        </Objectifs>
+        <Btn>Démarrer l’expérience !</Btn>
+      </Container>
     </Page>
   );
 };
 
-export const WelContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -42,7 +42,7 @@ export const WelContainer = styled.div`
   height: 100%;
 `;
 
-export const WelHeader = styled.div`
+const Header = styled.div`
   margin-top: 50px;
   margin-left: 20px;
   display: flex;
@@ -50,19 +50,19 @@ export const WelHeader = styled.div`
   align-items: flex-start;
 `;
 
-export const WelTitle = styled.h1`
+const Title = styled.h1`
   margin: 5px 0;
   font-size: ${({ theme }) => theme.size.medium};
   font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
-export const WelSubtitle = styled.h2`
+const Subtitle = styled.h2`
   color: ${({ theme }) => theme.colors.text.darker};
   font-size: ${({ theme }) => theme.size.small};
   font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
-export const Welname = styled.h3`
+const Name = styled.h3`
   width: 120px;
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +70,7 @@ export const Welname = styled.h3`
   font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
-export const WelObjectifs = styled.div`
+const Objectifs = styled.div`
   width: 100%;
   margin-top: 50px;
   margin-right: 60px;
@@ -80,7 +80,7 @@ export const WelObjectifs = styled.div`
   align-items: center;
 `;
 
-export const WelObjectif = styled.div`
+const Objectif = styled.div`
   margin: 10px 0;
   display: flex;
   flex-direction: column;
@@ -88,7 +88,7 @@ export const WelObjectif = styled.div`
   align-items: center;
 `;
 
-export const Welcube = styled.div`
+const Cube = styled.div`
   width: 100px;
   height: 100px;
   margin-top: 10px;
@@ -102,7 +102,7 @@ export const Welcube = styled.div`
   align-items: center;
 `;
 
-export const WelBtn = styled.button`
+const Btn = styled.button`
   font-size: ${({ theme }) => theme.size.small};
   font-weight: ${({ theme }) => theme.weight.bold};
   margin: 80px auto;
@@ -112,4 +112,4 @@ export const WelBtn = styled.button`
   text-align: center;
 `;
 
-export default Welcome;
+export default come;
