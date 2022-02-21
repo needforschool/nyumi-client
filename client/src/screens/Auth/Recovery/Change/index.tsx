@@ -65,8 +65,8 @@ const RecoveryChange: React.FC = () => {
                     type="number"
                     id={`code-${i}`}
                     name={`code-${i}`}
-                    min="0"
-                    max="9"
+                    min={0}
+                    max={9}
                     placeholder=""
                     autoFocus
                     required
@@ -105,6 +105,12 @@ const CodeField = styled(Field)`
   height: 100px;
   text-align: center;
   font-size: ${({ theme }) => theme.size.title};
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const ButtonGroup = styled(FieldGroup)`
