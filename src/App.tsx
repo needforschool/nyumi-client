@@ -34,6 +34,8 @@ import React from "react";
 import useThemeDetector from "./hooks/useThemeDetector";
 import GlobalStyle from "./components/Layout/GlobalStyle";
 import themes from "./services/themes";
+import RecoveryCode from "./screens/Auth/Recovery/Code";
+import Home from "./screens/Home";
 
 setupIonicReact();
 
@@ -61,6 +63,9 @@ const App: React.FC = () => {
             <Route exact path={ROUTES.RECOVERY_CHANGE}>
               <RecoveryChange />
             </Route>
+            <Route exact path={ROUTES.RECOVERY_CODE}>
+              <RecoveryCode />
+            </Route>
             <Route exact path={ROUTES.RECOVERY}>
               <Recovery />
             </Route>
@@ -70,8 +75,8 @@ const App: React.FC = () => {
             <Route exact path={ROUTES.SIGN_UP}>
               <SignUp />
             </Route>
-            <Route path={ROUTES.MAIN}>
-              <Welcome />
+            <Route exact path={ROUTES.MAIN}>
+              <Home />
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>
