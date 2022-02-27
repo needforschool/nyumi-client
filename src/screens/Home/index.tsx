@@ -29,7 +29,11 @@ const Home: React.FC = () => {
               <AddSquare size={40} />
               <CardSectionText>{"Ajouter"}</CardSectionText>
             </CardSection>
-            <CardSection>
+            <CardSection
+              onClick={() => {
+                router.push(ROUTES.STATISTICS_SMOKE);
+              }}
+            >
               <Kanban size={30} />
               <CardSectionText>{"Voir plus"}</CardSectionText>
             </CardSection>
@@ -43,7 +47,11 @@ const Home: React.FC = () => {
             <CardSection>
               <CardCounter>{1934}</CardCounter>
             </CardSection>
-            <CardSection>
+            <CardSection
+              onClick={() => {
+                router.push(ROUTES.STATISTICS_WALK);
+              }}
+            >
               <Kanban size={30} />
               <CardSectionText>{"Voir plus"}</CardSectionText>
             </CardSection>
