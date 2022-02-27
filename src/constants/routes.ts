@@ -4,6 +4,8 @@ const ROUTES = {
   WELCOME: "/welcome",
   GOAL: "/goal",
   STATISTICS: "/statistics",
+  STATISTICS_SMOKE: "/statistics/smoke",
+  STATISTICS_WALK: "/statistics/walk",
 
   /* AUTH */
   AUTH: "/auth",
