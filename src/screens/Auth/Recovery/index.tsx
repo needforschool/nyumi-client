@@ -1,3 +1,4 @@
+import { useHistory } from "react-router";
 import Field from "../../../components/Form/Field";
 import {
   AuthButton,
@@ -12,8 +13,11 @@ import {
   FieldGroup,
 } from "../../../components/Layout/Auth";
 import Page from "../../../components/Page";
+import ROUTES from "../../../constants/routes";
 
 const Recovery: React.FC = () => {
+  const router = useHistory();
+
   return (
     <Page>
       <AuthContainer>
@@ -21,12 +25,17 @@ const Recovery: React.FC = () => {
           <AuthTitle>Nyumi</AuthTitle>
         </AuthHeader>
         <AuthStepHeader>
-          <AuthStepTitle>Mot de passe oublié?</AuthStepTitle>
+          <AuthStepTitle>Mot de passe oublié ?</AuthStepTitle>
           <AuthStepDescription>
             Nous allons t’aider à le récupérer !
           </AuthStepDescription>
         </AuthStepHeader>
-        <AuthForm>
+        <AuthForm
+          onSubmit={(event) => {
+            event.preventDefault();
+            router.push(ROUTES.RECOVERY_CODE);
+          }}
+        >
           <FieldGroup>
             <FieldContainer>
               <Field

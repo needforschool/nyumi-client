@@ -1,3 +1,5 @@
+import { useHistory } from "react-router";
+import styled from "styled-components";
 import Field from "../../../components/Form/Field";
 import {
   AuthButton,
@@ -12,10 +14,13 @@ import {
   FieldContainer,
   FieldGroup,
 } from "../../../components/Layout/Auth";
+import Link from "../../../components/Link";
 import Page from "../../../components/Page";
 import ROUTES from "../../../constants/routes";
 
 const SignIn: React.FC = () => {
+  const router = useHistory();
+
   return (
     <Page>
       <AuthContainer>
@@ -28,7 +33,12 @@ const SignIn: React.FC = () => {
             Connecte toi pour accéder à l’application
           </AuthStepDescription>
         </AuthStepHeader>
-        <AuthForm>
+        <AuthForm
+          onSubmit={(event) => {
+            event.preventDefault();
+            router.push(ROUTES.MAIN);
+          }}
+        >
           <FieldGroup>
             <FieldContainer>
               <Field
@@ -48,16 +58,15 @@ const SignIn: React.FC = () => {
                 id="empasswordail"
                 name="password"
                 placeholder="Password"
-                autoFocus
                 required
               />
             </FieldContainer>
           </FieldGroup>
           <FieldGroup>
             <AuthButton type={"submit"}>{"Se connecter"}</AuthButton>
-            <AuthButton type={"submit"} outline>
+            <RegisterButton href={ROUTES.SIGN_UP} outline>
               {"S'enregistrer"}
-            </AuthButton>
+            </RegisterButton>
 
             <AuthLink href={ROUTES.RECOVERY}>
               {"Mot de passe oublié ?"}
@@ -68,5 +77,11 @@ const SignIn: React.FC = () => {
     </Page>
   );
 };
+
+const RegisterButton = styled(({ children, ...props }) => (
+  <AuthButton as={Link} {...props}>
+    {children}
+  </AuthButton>
+))``;
 
 export default SignIn;
