@@ -21,6 +21,8 @@
     "@types/react-router-dom": "^5.1.7",
     "iconsax-react": "^0.0.8",
     "ionicons": "^5.4.0",
+    "js-cookie": "^3.0.1",
+    "jwt-decode": "^3.1.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
@@ -74,6 +76,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "3.3.4",
+    "@types/js-cookie": "^3.0.1",
     "@types/styled-components": "^5.1.22",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
