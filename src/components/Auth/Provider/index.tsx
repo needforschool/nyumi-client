@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const AuthProvider: React.FC<Props> = ({ children }: Props) => {
+const PrivateProvider: React.FC<Props> = ({ children }: Props) => {
   const { user } = React.useContext(AuthContext);
   const router = useHistory();
 
@@ -21,4 +21,4 @@ const AuthProvider: React.FC<Props> = ({ children }: Props) => {
   return user ? <>{children}</> : <Loading />;
 };
 
-export default AuthProvider;
+export default PrivateProvider;
