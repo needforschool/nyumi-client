@@ -21,7 +21,7 @@ export default styled.button<{ outline?: boolean }>`
   cursor: pointer;
   outline: none;
   border: ${(props) => {
-    if (props.outline) return `1px solid ${props.theme.colors.accent.light}`;
+    if (props.outline) return `1px solid ${props.theme.colors.text.lightest}`;
     return "none";
   }};
   transition: all 0.2s;
