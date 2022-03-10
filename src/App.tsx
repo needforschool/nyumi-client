@@ -38,54 +38,62 @@ import RecoveryCode from "./screens/Auth/Recovery/Code";
 import Home from "./screens/Home";
 import PrivateProvider from "./components/Auth/Provider";
 
+import { client as apolloClient } from "./services/apollo/client";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { AuthProvider } from "./contexts/Auth";
+
 setupIonicReact();
 
 const App: React.FC = () => {
   const isDarkTheme = useThemeDetector();
 
   return (
-    <ThemeProvider theme={isDarkTheme ? themes.dark : themes.light}>
-      <GlobalStyle />
-      <IonApp>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <PrivateProvider>
-              <Route exact path={ROUTES.WELCOME}>
-                <Welcome />
-              </Route>
-              <Route exact path={ROUTES.GOAL}>
-                <Goal />
-              </Route>
-              <Route exact path={ROUTES.STATISTICS}>
-                <Statistic />
-              </Route>
-              <Route exact path={ROUTES.ACCOUNT}>
-                <Account />
-              </Route>
-              <Route exact path={ROUTES.MAIN}>
-                <Home />
-              </Route>
-            </PrivateProvider>
+    <ApolloProvider client={apolloClient}>
+      <AuthProvider>
+        <ThemeProvider theme={isDarkTheme ? themes.dark : themes.light}>
+          <GlobalStyle />
+          <IonApp>
+            <IonReactRouter>
+              <IonRouterOutlet>
+                <PrivateProvider>
+                  <Route exact path={ROUTES.WELCOME}>
+                    <Welcome />
+                  </Route>
+                  <Route exact path={ROUTES.GOAL}>
+                    <Goal />
+                  </Route>
+                  <Route exact path={ROUTES.STATISTICS}>
+                    <Statistic />
+                  </Route>
+                  <Route exact path={ROUTES.ACCOUNT}>
+                    <Account />
+                  </Route>
+                  <Route exact path={ROUTES.MAIN}>
+                    <Home />
+                  </Route>
+                </PrivateProvider>
 
-            <Route exact path={ROUTES.RECOVERY_CHANGE}>
-              <RecoveryChange />
-            </Route>
-            <Route exact path={ROUTES.RECOVERY_CODE}>
-              <RecoveryCode />
-            </Route>
-            <Route exact path={ROUTES.RECOVERY}>
-              <Recovery />
-            </Route>
-            <Route exact path={ROUTES.SIGN_IN}>
-              <SignIn />
-            </Route>
-            <Route exact path={ROUTES.SIGN_UP}>
-              <SignUp />
-            </Route>
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </IonApp>
-    </ThemeProvider>
+                <Route exact path={ROUTES.RECOVERY_CHANGE}>
+                  <RecoveryChange />
+                </Route>
+                <Route exact path={ROUTES.RECOVERY_CODE}>
+                  <RecoveryCode />
+                </Route>
+                <Route exact path={ROUTES.RECOVERY}>
+                  <Recovery />
+                </Route>
+                <Route exact path={ROUTES.SIGN_IN}>
+                  <SignIn />
+                </Route>
+                <Route exact path={ROUTES.SIGN_UP}>
+                  <SignUp />
+                </Route>
+              </IonRouterOutlet>
+            </IonReactRouter>
+          </IonApp>
+        </ThemeProvider>
+      </AuthProvider>
+    </ApolloProvider>
   );
 };
 
