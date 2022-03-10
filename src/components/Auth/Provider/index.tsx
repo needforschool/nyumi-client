@@ -12,8 +12,6 @@ const PrivateProvider: React.FC<Props> = ({ children }: Props) => {
   const { user } = React.useContext(AuthContext);
   const router = useHistory();
 
-  console.log(user);
-
   React.useEffect(() => {
     if (!user) router.push(ROUTES.SIGN_IN);
   }, [user, router]);

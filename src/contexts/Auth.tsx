@@ -1,6 +1,5 @@
 import React from "react";
 import jwtDecode from "jwt-decode";
-import Cookies from "js-cookie";
 import { useHistory } from "react-router";
 import { User } from "../types/auth";
 import ROUTES from "../constants/routes";
@@ -8,11 +7,11 @@ import ROUTES from "../constants/routes";
 const initialState = {
   user: null,
 };
-if (Cookies.get("jwtToken")) {
-  const decodedToken: any = jwtDecode(Cookies.get("jwtToken") || "");
+if (localStorage.getItem("jwtToken")) {
+  const decodedToken: any = jwtDecode(localStorage.getItem("jwtToken") || "");
 
   if (decodedToken.exp * 1000 < Date.now()) {
-    Cookies.remove("jwtToken");
+    localStorage.removeItem("jwtToken");
   } else {
     initialState.user = decodedToken;
   }
@@ -49,7 +48,7 @@ const AuthProvider = (props: any) => {
   const [state, dispatch] = React.useReducer(authReducer, initialState);
 
   const login = (userData: any) => {
-    Cookies.set("jwtToken", userData.token);
+    localStorage.setItem("jwtToken", userData.token);
     dispatch({
       type: "LOGIN",
       payload: userData,
@@ -58,9 +57,11 @@ const AuthProvider = (props: any) => {
 
   const logout = async () => {
     await router.push(ROUTES.SIGN_IN);
-    Cookies.remove("jwtToken");
+    localStorage.removeItem("jwtToken");
     dispatch({ type: "LOGOUT" });
   };
+
+  console.log("auth state:", state.user);
 
   return (
     <AuthContext.Provider
