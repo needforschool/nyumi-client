@@ -28,7 +28,6 @@ import Recovery from "./screens/Auth/Recovery";
 import RecoveryChange from "./screens/Auth/Recovery/Change";
 import Account from "./screens/Account";
 import Statistic from "./screens/Statistic";
-import Welcome from "./screens/Welcome";
 import Goal from "./screens/Goal";
 import React from "react";
 import useThemeDetector from "./hooks/useThemeDetector";
@@ -57,7 +56,7 @@ const App: React.FC = () => {
               <IonRouterOutlet>
                 <PrivateProvider>
                   <Route exact path={ROUTES.WELCOME}>
-                    <Welcome />
+                    <Home />
                   </Route>
                   <Route exact path={ROUTES.GOAL}>
                     <Goal />
