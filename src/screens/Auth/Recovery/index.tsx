@@ -1,4 +1,5 @@
-import { useHistory } from "react-router";
+import { useMutation } from "@apollo/react-hooks";
+import React from "react";
 import Field from "../../../components/Form/Field";
 import {
   AuthButton,
@@ -13,10 +14,34 @@ import {
   FieldGroup,
 } from "../../../components/Layout/Auth";
 import Page from "../../../components/Page";
-import ROUTES from "../../../constants/routes";
+import { useForm } from "../../../hooks/useForm";
+import { RECOVER_USER } from "../../../queries/auth";
 
 const Recovery: React.FC = () => {
-  const router = useHistory();
+  const [success, setSuccess] = React.useState<boolean>(false);
+  const [errors, setErrors] = React.useState({
+    email: "",
+  });
+
+  const recoverCallback = () => {
+    recover();
+  };
+
+  const { onChange, onSubmit, values, valid } = useForm(recoverCallback, {
+    email: "",
+  });
+
+  const [recover, { loading }] = useMutation(RECOVER_USER, {
+    update(_, { data }) {
+      setSuccess(data?.recoverUser.success);
+    },
+    onError(err) {
+      setErrors({
+        email: err.graphQLErrors[0].message,
+      });
+    },
+    variables: values,
+  });
 
   return (
     <Page>
@@ -30,12 +55,7 @@ const Recovery: React.FC = () => {
             Nous allons t’aider à le récupérer !
           </AuthStepDescription>
         </AuthStepHeader>
-        <AuthForm
-          onSubmit={(event) => {
-            event.preventDefault();
-            router.push(ROUTES.RECOVERY_CODE);
-          }}
-        >
+        <AuthForm onSubmit={onSubmit}>
           <FieldGroup>
             <FieldContainer>
               <Field
@@ -45,11 +65,16 @@ const Recovery: React.FC = () => {
                 placeholder="Email"
                 autoFocus
                 required
+                value={values.email.toLowerCase()}
+                error={errors.email}
+                setErrors={setErrors}
+                errors={errors}
+                onChange={onChange}
               />
             </FieldContainer>
           </FieldGroup>
           <FieldGroup>
-            <AuthButton type={"submit"}>
+            <AuthButton type={"submit"} loading={loading} valid={valid}>
               {"Réinitialiser le mot de passe"}
             </AuthButton>
           </FieldGroup>

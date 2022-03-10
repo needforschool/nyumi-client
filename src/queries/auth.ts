@@ -27,3 +27,11 @@ export const REGISTER_USER = gql`
     }
   }
 `;
+
+export const RECOVER_USER = gql`
+  mutation recoverUser($email: String!) {
+    recoverUser(email: $email) {
+      success
+    }
+  }
+`;
