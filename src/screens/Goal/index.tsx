@@ -1,33 +1,43 @@
 import Page from "../../components/Page";
 import styled from "styled-components";
+import Field from "../../components/Form/Field";
+import Button from "../../components/Layout/Button";
 
 const Goal: React.FC = () => {
   return (
     <Page>
       <Container>
         <Header>
-          <Title>Mes Objectif</Title>
+          <Title>Mes Objectifs</Title>
           <Subtitle>Choisir mes objectifs</Subtitle>
         </Header>
-        <Objectifs>
-          <Objectif>
-            <Name>Nombre de pas par jour</Name>
-            <Cube>2500</Cube>
-          </Objectif>
-          <Objectif>
-            <Name>Nombre de cigarettes par jour</Name>
-            <Cube>5</Cube>
-          </Objectif>
-          <Objectif>
-            <Name>Nombre de pas par jour</Name>
-            <Cube>2500</Cube>
-          </Objectif>
-          <Objectif>
-            <Name>Nombre de cigarettes par jour</Name>
-            <Cube>5</Cube>
-          </Objectif>
-        </Objectifs>
-        <Btn>Démarrer l’expérience !</Btn>
+        <Goals>
+          <GoalContainer>
+            <GoalName>Nombre de pas par jour</GoalName>
+            <GoalField
+              type="number"
+              id={"steps"}
+              name={"steps"}
+              min={0}
+              placeholder=""
+              autoFocus
+              required
+            />
+          </GoalContainer>
+          <GoalContainer>
+            <GoalName>Nombre de cigarettes par jour</GoalName>
+            <GoalField
+              type="number"
+              id={"smoke"}
+              name={"smoke"}
+              min={0}
+              placeholder=""
+              autoFocus
+              required
+            />
+          </GoalContainer>
+        </Goals>
+        <GoalButton>Démarrer l’expérience !</GoalButton>
       </Container>
     </Page>
   );
@@ -62,7 +72,7 @@ const Subtitle = styled.h2`
   font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
-const Name = styled.h3`
+const GoalName = styled.h3`
   width: 120px;
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +80,7 @@ const Name = styled.h3`
   font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
-const Objectifs = styled.div`
+const Goals = styled.div`
   width: 100%;
   margin-top: 50px;
   margin-right: 60px;
@@ -80,7 +90,7 @@ const Objectifs = styled.div`
   align-items: center;
 `;
 
-const Objectif = styled.div`
+const GoalContainer = styled.div`
   margin: 10px 0;
   display: flex;
   flex-direction: column;
@@ -88,21 +98,19 @@ const Objectif = styled.div`
   align-items: center;
 `;
 
-const Cube = styled.div`
-  width: 100px;
-  height: 100px;
-  margin-top: 10px;
-  background-color: ${({ theme }) => theme.colors.layout.light};
-  color: #fff;
-  font-size: ${({ theme }) => theme.size.medium};
-  font-weight: ${({ theme }) => theme.weight.bold};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const GoalField = styled(Field)`
+  width: 50%;
+  height: 120px;
+  text-align: center;
+  font-size: ${({ theme }) => theme.size.title};
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
-const Btn = styled.button`
+const GoalButton = styled(Button)`
   font-size: ${({ theme }) => theme.size.small};
   font-weight: ${({ theme }) => theme.weight.bold};
   margin: 80px auto;
