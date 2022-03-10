@@ -1,3 +1,4 @@
+import React from "react";
 import { useHistory } from "react-router";
 import Field from "../../../components/Form/Field";
 import {
@@ -14,14 +15,45 @@ import {
 } from "../../../components/Layout/Auth";
 import Page from "../../../components/Page";
 import ROUTES from "../../../constants/routes";
+import { AuthContext } from "../../../contexts/Auth";
+import { useForm } from "../../../hooks/useForm";
+import { useMutation } from "@apollo/react-hooks";
+import { REGISTER_USER } from "../../../queries/auth";
+import APP from "../../../constants/app";
 
 const SignUp: React.FC = () => {
   const router = useHistory();
+  const context = React.useContext(AuthContext);
+
+  const registerUserCallback = () => {
+    addUser();
+  };
+
+  const { onChange, onSubmit, values, valid, setErrors } = useForm(
+    registerUserCallback,
+    {
+      email: "",
+      password: "",
+      firstname: "",
+    }
+  );
+
+  const [addUser, { loading }] = useMutation(REGISTER_USER, {
+    update(_, { data: { register: userData } }) {
+      context.login(userData);
+      router.push(ROUTES.MAIN);
+    },
+    onError(err: any) {
+      setErrors(err.graphQLErrors[0].extensions?.exception.errors);
+    },
+    variables: values,
+  });
+
   return (
     <Page>
       <AuthContainer>
         <AuthHeader>
-          <AuthTitle>Nyumi</AuthTitle>
+          <AuthTitle>{APP.NAME}</AuthTitle>
         </AuthHeader>
         <AuthStepHeader>
           <AuthStepTitle>Commençons</AuthStepTitle>
@@ -29,15 +61,11 @@ const SignUp: React.FC = () => {
             Nous avons besoin de mieux vous connaître
           </AuthStepDescription>
         </AuthStepHeader>
-        <AuthForm
-          onSubmit={(event) => {
-            event.preventDefault();
-            router.push(ROUTES.WELCOME);
-          }}
-        >
+        <AuthForm onSubmit={onSubmit}>
           <FieldGroup>
             <FieldContainer>
               <Field
+                onChange={onChange}
                 type="text"
                 id="firstname"
                 name="firstname"
@@ -50,11 +78,11 @@ const SignUp: React.FC = () => {
           <FieldGroup>
             <FieldContainer>
               <Field
+                onChange={onChange}
                 type="email"
                 id="email"
                 name="email"
                 placeholder="Email"
-                autoFocus
                 required
               />
             </FieldContainer>
@@ -62,17 +90,19 @@ const SignUp: React.FC = () => {
           <FieldGroup>
             <FieldContainer>
               <Field
+                onChange={onChange}
                 type="password"
                 id="password"
                 name="password"
                 placeholder="Mot de passe"
-                autoFocus
                 required
               />
             </FieldContainer>
           </FieldGroup>
           <FieldGroup>
-            <AuthButton type={"submit"}>{"S'enregistrer"}</AuthButton>
+            <AuthButton type={"submit"} valid={valid}>
+              {"S'enregistrer"}
+            </AuthButton>
           </FieldGroup>
         </AuthForm>
       </AuthContainer>
