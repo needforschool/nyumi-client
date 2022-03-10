@@ -44,11 +44,10 @@ const Container = styled(IonPage)`
 `;
 
 const Toolbar = styled.header`
-  min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15px;
+  padding: 50px 15px 15px;
 `;
 
 export default Page;
