@@ -1,3 +1,5 @@
+import { useMutation } from "@apollo/react-hooks";
+import React from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import Theme from "../../components/Account/Theme";
@@ -13,10 +15,35 @@ import {
 } from "../../components/Layout/Auth";
 import Page from "../../components/Page";
 import ROUTES from "../../constants/routes";
+import { AuthContext } from "../../contexts/Auth";
+import { useForm } from "../../hooks/useForm";
+import { UPDATE_USER } from "../../queries/users";
 import themes from "../../services/themes";
+import capitalize from "../../utils/captitalize";
 
 const Account: React.FC = () => {
   const router = useHistory();
+
+  const { user, login } = React.useContext(AuthContext);
+
+  const updateUserCallback = () => {
+    updateUser();
+  };
+
+  const { values, onChange, onSubmit, errors, setErrors } = useForm(
+    updateUserCallback,
+    {
+      email: user?.email || "",
+      firstname: user?.firstname || "",
+    }
+  );
+
+  const [updateUser] = useMutation(UPDATE_USER, {
+    variables: values,
+    update(_, { data: { updateUser: _userData } }) {
+      login(_userData);
+    },
+  });
 
   return (
     <Page toolbar>
@@ -30,11 +57,15 @@ const Account: React.FC = () => {
         <FieldGroup>
           <FieldContainer>
             <Field
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              autoFocus
+              type={"text"}
+              id={"firstname"}
+              name={"firstname"}
+              placeholder={"First Name"}
+              errors={errors}
+              setErrors={setErrors}
+              error={errors?.firstname}
+              onChange={onChange}
+              value={capitalize(values.firstname)}
               required
             />
           </FieldContainer>
@@ -42,10 +73,15 @@ const Account: React.FC = () => {
         <FieldGroup>
           <FieldContainer>
             <Field
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              onChange={onChange}
+              value={values.email.toLowerCase()}
+              error={errors.email}
+              setErrors={setErrors}
+              errors={errors}
               required
             />
           </FieldContainer>
@@ -81,7 +117,12 @@ const Account: React.FC = () => {
             />
           </Row>
         </Section>
-        <AuthButton valid onClick={() => console.log("save")}>
+        <AuthButton
+          valid
+          onClick={(event) => {
+            onSubmit(event);
+          }}
+        >
           {"Sauvegarder"}
         </AuthButton>
       </Content>
