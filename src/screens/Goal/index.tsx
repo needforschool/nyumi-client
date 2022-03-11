@@ -6,8 +6,14 @@ import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { UPDATE_USER_GOALS } from "../../queries/users";
 import { useMutation } from "@apollo/react-hooks";
+import { AuthContext } from "../../contexts/Auth";
+import { useHistory } from "react-router";
+import ROUTES from "../../constants/routes";
 
 const Goal: React.FC = () => {
+  const router = useHistory();
+  const { user, login } = React.useContext(AuthContext);
+
   const updateUserCallback = () => {
     updateUserGoals();
   };
@@ -15,14 +21,16 @@ const Goal: React.FC = () => {
   const { values, onChange, onSubmit, errors, setErrors } = useForm(
     updateUserCallback,
     {
-      goals: "",
+      step: user?.goals.step || 0,
+      smoke: user?.goals.smoke || 0,
     }
   );
 
   const [updateUserGoals] = useMutation(UPDATE_USER_GOALS, {
     variables: values,
     update(_, { data: { updateUserGoals: _userData } }) {
-      //   login(_userData);
+      login(_userData);
+      router.push(ROUTES.MAIN);
     },
   });
 
@@ -38,9 +46,10 @@ const Goal: React.FC = () => {
             <GoalName>Nombre de pas par jour</GoalName>
             <GoalField
               type="number"
-              id={"steps"}
-              name={"steps"}
+              id={"step"}
+              name={"step"}
               min={0}
+              value={values.step}
               onChange={onChange}
               errors={errors}
               setErrors={setErrors}
@@ -57,6 +66,7 @@ const Goal: React.FC = () => {
               id={"smoke"}
               name={"smoke"}
               min={0}
+              value={values.smoke}
               onChange={onChange}
               errors={errors}
               setErrors={setErrors}
