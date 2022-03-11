@@ -43,6 +43,20 @@
   dependencies:
     "@apollo/client" latest
 
+"@awesome-cordova-plugins/core@^5.40.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/core/-/core-5.40.0.tgz#aa07eef57f50acc9da2e0d538bf5858e262348dd"
+  integrity sha512-tk5QlnXfSE2Zu3mJVC3f11Guu5iqnLtNkvvClNHjz/e4FsJEmprfXWCv/QImWs5fLsismHcn31LKYBfWIhOv9g==
+  dependencies:
+    "@types/cordova" latest
+
+"@awesome-cordova-plugins/health@^5.40.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/health/-/health-5.40.0.tgz#3f057530df10fd2e3c92279cb39e2961fdbcdd67"
+  integrity sha512-PPJsHGsR12UJMDCQH2ULHpV6RG0xViExhPW8MYKuB0daF14NxlUAHTMVep0MnpFzr2GlxCoTKvPZfTd5Kxk+iA==
+  dependencies:
+    "@types/cordova" latest
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.8.3":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
@@ -1884,6 +1898,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/cordova@latest":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/cordova/-/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
+  integrity sha1-6nrd907Ow9dimCegw54smt3HPQQ=
+
 "@types/eslint-scope@^3.7.0":
   version "3.7.3"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.3.tgz#125b88504b61e3c8bc6f870882003253005c3224"
@@ -3443,6 +3462,11 @@ cookie@0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.1.tgz#afd713fe26ebd21ba95ceb61f9a8116e50a537d1"
   integrity sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==
+
+cordova-plugin-health@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-health/-/cordova-plugin-health-2.0.3.tgz#eed86ce278b60e45e1dcc3abc94f1fd8e02350ce"
+  integrity sha512-gy6BNjO86mgdwTrYerCmttvKVRP/zPgyG0h8pBSjbylPZOtbyGtMmmjjhod+srud3YZlqkwFc7vA6fsdpJXGZQ==
 
 core-js-compat@^3.20.2, core-js-compat@^3.21.0:
   version "3.21.0"
@@ -8006,6 +8030,13 @@ run-parallel@^1.1.9:
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   dependencies:
     queue-microtask "^1.2.2"
+
+rxjs@^7.5.5:
+  version "7.5.5"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.5.tgz#2ebad89af0f560f460ad5cc4213219e1f7dd4e9f"
+  integrity sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==
+  dependencies:
+    tslib "^2.1.0"
 
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
