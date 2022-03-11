@@ -63,7 +63,7 @@ const Home: React.FC = () => {
       <Content>
         <Card color={"rgb(46, 213, 115)"}>
           <CardHeader>
-            <CardTitle>{"Conso de cigarette aujourd’hui"}</CardTitle>
+            <CardTitle>{"Conso de cigarettes aujourd’hui"}</CardTitle>
           </CardHeader>
           <CardContent>
             <CardSection>
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
             </CardSection>
             <CardSection
               onClick={() => {
-                router.push(ROUTES.STATISTICS_WALK);
+                router.push(ROUTES.STATISTICS_STEP);
               }}
             >
               <Kanban size={50} />
