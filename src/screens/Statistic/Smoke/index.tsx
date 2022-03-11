@@ -17,6 +17,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_SMOKES } from "../../../queries/smoke";
 import { Cigarette } from "../../../types/cigarette";
 import convertDate from "../../../utils/convertDate";
+import { AuthContext } from "../../../contexts/Auth";
 
 ChartJS.register(
   LinearScale,
@@ -43,6 +44,7 @@ const options = {
 };
 
 const StatisticSmoke: React.FC = () => {
+  const { user } = React.useContext(AuthContext);
   const { data } = useQuery(GET_SMOKES);
 
   const cigarettes = data?.getAllSmoke || [];
@@ -67,7 +69,7 @@ const StatisticSmoke: React.FC = () => {
     return acc;
   }, [] as number[]);
 
-  console.log(smokes);
+  console.log(user?.goals.smoke);
 
   const chartData = {
     labels: days,
@@ -78,7 +80,7 @@ const StatisticSmoke: React.FC = () => {
         borderColor: "rgb(255, 99, 132)",
         borderWidth: 2,
         fill: false,
-        data: cigarettes.map(() => 50),
+        data: cigarettes.map(() => user?.goals.smoke || 0),
       },
       {
         label: "Conso de cigarettes",
