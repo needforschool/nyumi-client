@@ -20,6 +20,7 @@ import { useForm } from "../../../hooks/useForm";
 import { useMutation } from "@apollo/react-hooks";
 import { REGISTER_USER } from "../../../queries/auth";
 import APP from "../../../constants/app";
+import capitalize from "../../../utils/captitalize";
 
 const SignUp: React.FC = () => {
   const router = useHistory();
@@ -29,7 +30,7 @@ const SignUp: React.FC = () => {
     addUser();
   };
 
-  const { onChange, onSubmit, values, valid, setErrors } = useForm(
+  const { onChange, onSubmit, values, valid, setErrors, errors } = useForm(
     registerUserCallback,
     {
       email: "",
@@ -70,6 +71,10 @@ const SignUp: React.FC = () => {
                 id="firstname"
                 name="firstname"
                 placeholder="Prénom"
+                errors={errors}
+                setErrors={setErrors}
+                error={errors?.firstname}
+                value={capitalize(values.firstname)}
                 autoFocus
                 required
               />
