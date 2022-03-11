@@ -125,6 +125,11 @@ const Account: React.FC = () => {
               color={"rgb(30, 31, 32)"}
               theme={themes.dark}
             />
+            <Theme
+              name={"Rouge"}
+              color={"rgb(214, 48, 49)"}
+              theme={themes.red}
+            />
           </Row>
         </Section>
         <AuthButton
