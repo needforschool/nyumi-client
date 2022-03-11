@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, { data: { register: userData } }) {
       context.login(userData);
-      router.push(ROUTES.MAIN);
+      router.push(ROUTES.GOAL);
     },
     onError(err: any) {
       setErrors(err.graphQLErrors[0].extensions?.exception.errors);
