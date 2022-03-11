@@ -26,6 +26,7 @@
     "apollo-client": "^2.6.10",
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
+    "chart.js": "^3.7.1",
     "cordova-plugin-health": "^2.0.3",
     "graphql": "^16.3.0",
     "graphql-tag": "^2.12.6",
