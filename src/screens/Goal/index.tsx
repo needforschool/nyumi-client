@@ -2,11 +2,12 @@ import Page from "../../components/Page";
 import styled from "styled-components";
 import Field from "../../components/Form/Field";
 import Button from "../../components/Layout/Button";
+import React from "react";
 
 const Goal: React.FC = () => {
   return (
-    <Page>
-      <Container>
+    <Page toolbar>
+      <Content>
         <Header>
           <Title>Mes Objectifs</Title>
           <Subtitle>Choisir mes objectifs</Subtitle>
@@ -38,23 +39,18 @@ const Goal: React.FC = () => {
           </GoalContainer>
         </Goals>
         <GoalButton>Démarrer l’expérience !</GoalButton>
-      </Container>
+      </Content>
     </Page>
   );
 };
 
-const Container = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: center;
-  height: 100%;
+  padding: 0 15px;
 `;
 
 const Header = styled.div`
-  margin-top: 50px;
-  margin-left: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -76,8 +72,9 @@ const GoalName = styled.h3`
   width: 120px;
   display: flex;
   flex-wrap: wrap;
-  font-size: ${({ theme }) => theme.size.tiny};
+  font-size: ${({ theme }) => theme.size.small};
   font-weight: ${({ theme }) => theme.weight.bold};
+  text-align: center;
 `;
 
 const Goals = styled.div`
@@ -99,8 +96,9 @@ const GoalContainer = styled.div`
 `;
 
 const GoalField = styled(Field)`
-  width: 50%;
-  height: 120px;
+  margin-top: 10px;
+  width: 80px;
+  height: 80px;
   text-align: center;
   font-size: ${({ theme }) => theme.size.title};
   ::-webkit-outer-spin-button,
@@ -112,12 +110,7 @@ const GoalField = styled(Field)`
 
 const GoalButton = styled(Button)`
   font-size: ${({ theme }) => theme.size.small};
-  font-weight: ${({ theme }) => theme.weight.bold};
-  margin: 80px auto;
-  padding: 10px;
-  border-radius: 5px;
-  width: 90%;
-  text-align: center;
+  margin-top: 20px;
 `;
 
 export default Goal;
