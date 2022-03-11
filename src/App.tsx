@@ -20,19 +20,15 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import { ThemeProvider } from "styled-components";
 import SignUp from "./screens/Auth/SignUp";
 import ROUTES from "./constants/routes";
 import SignIn from "./screens/Auth/SignIn";
 import Recovery from "./screens/Auth/Recovery";
 import RecoveryChange from "./screens/Auth/Recovery/Change";
 import Account from "./screens/Account";
-import Statistic from "./screens/Statistic";
 import Goal from "./screens/Goal";
 import React from "react";
-import useThemeDetector from "./hooks/useThemeDetector";
 import GlobalStyle from "./components/Layout/GlobalStyle";
-import themes from "./services/themes";
 import RecoveryCode from "./screens/Auth/Recovery/Code";
 import Home from "./screens/Home";
 import PrivateProvider from "./components/Auth/Provider";
@@ -40,10 +36,8 @@ import PrivateProvider from "./components/Auth/Provider";
 import { client as apolloClient } from "./services/apollo/client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { AuthProvider } from "./contexts/Auth";
-import {
-  GlobalThemeContext,
-  GlobalThemeProvider,
-} from "./contexts/GlobalTheme";
+import { GlobalThemeProvider } from "./contexts/GlobalTheme";
+import StatisticSmoke from "./screens/Statistic/Smoke";
 
 setupIonicReact();
 
@@ -63,8 +57,8 @@ const App: React.FC = () => {
                   <Route exact path={ROUTES.GOAL}>
                     <Goal />
                   </Route>
-                  <Route exact path={ROUTES.STATISTICS}>
-                    <Statistic />
+                  <Route exact path={ROUTES.STATISTICS_SMOKE}>
+                    <StatisticSmoke />
                   </Route>
                   <Route exact path={ROUTES.ACCOUNT}>
                     <Account />
