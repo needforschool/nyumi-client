@@ -3,9 +3,27 @@ import Page from "../../components/Page";
 import { AddSquare, Kanban, Setting2 } from "iconsax-react";
 import { useHistory } from "react-router";
 import ROUTES from "../../constants/routes";
+import { useCallback, useState } from "react";
+import { insertCigarette, retrieveCigarettes } from "../../services/storage";
+import { Cigarette } from "../../types/cigarette";
+import { useMutation } from "@apollo/react-hooks";
+import { ADD_SMOKE } from "../../queries/smoke";
 
 const Home: React.FC = () => {
   const router = useHistory();
+
+  const [todayCigarettes, setTodayCigarettes] = useState<number>(
+    retrieveCigarettes("today").length
+  );
+
+  const [addSmoke] = useMutation(ADD_SMOKE);
+
+  const handleCigaretteAdd = useCallback(() => {
+    const cigarettes: Cigarette[] = insertCigarette();
+    setTodayCigarettes(cigarettes.length);
+
+    addSmoke();
+  }, []);
 
   return (
     <Page
@@ -26,9 +44,9 @@ const Home: React.FC = () => {
           </CardHeader>
           <CardContent>
             <CardSection>
-              <CardCounter>{3}</CardCounter>
+              <CardCounter>{todayCigarettes}</CardCounter>
             </CardSection>
-            <CardSection>
+            <CardSection onClick={() => handleCigaretteAdd()}>
               <AddSquare size={40} />
               <CardSectionText>{"Ajouter"}</CardSectionText>
             </CardSection>

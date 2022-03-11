@@ -2,8 +2,5 @@
 	"appId": "com.onruntime.nyumi",
 	"appName": "client",
 	"webDir": "build",
-	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://172.20.10.12:8100"
-	}
+	"bundledWebRuntime": false
 }
