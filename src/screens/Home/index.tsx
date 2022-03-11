@@ -3,9 +3,21 @@ import Page from "../../components/Page";
 import { AddSquare, Kanban, Setting2 } from "iconsax-react";
 import { useHistory } from "react-router";
 import ROUTES from "../../constants/routes";
+import { useCallback, useState } from "react";
+import { insertCigarette, retrieveCigarettes } from "../../services/storage";
+import { Cigarette } from "../../types/cigarette";
 
 const Home: React.FC = () => {
   const router = useHistory();
+
+  const [todayCigarettes, setTodayCigarettes] = useState<number>(
+    retrieveCigarettes("today").length
+  );
+
+  const handleCigaretteAdd = useCallback(() => {
+    const cigarettes: Cigarette[] = insertCigarette();
+    setTodayCigarettes(cigarettes.length);
+  }, []);
 
   return (
     <Page
@@ -26,9 +38,9 @@ const Home: React.FC = () => {
           </CardHeader>
           <CardContent>
             <CardSection>
-              <CardCounter>{3}</CardCounter>
+              <CardCounter>{todayCigarettes}</CardCounter>
             </CardSection>
-            <CardSection>
+            <CardSection onClick={() => handleCigaretteAdd()}>
               <AddSquare size={40} />
               <CardSectionText>{"Ajouter"}</CardSectionText>
             </CardSection>
