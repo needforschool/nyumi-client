@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import moment from "moment";
 
 ChartJS.register(
   CategoryScale,
@@ -22,6 +23,7 @@ ChartJS.register(
 );
 
 export const options = {
+  maintainAspectRatio: false,
   responsive: true,
   plugins: {
     legend: {
@@ -34,13 +36,15 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = [...new Array(7)].map((i, idx) =>
+  moment().startOf("day").subtract(idx, "days")
+);
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "Conso de cigarettes",
       data: labels.map(() => 100),
       backgroundColor: "rgba(255, 99, 132, 0.5)",
     },
@@ -52,7 +56,7 @@ const StatisticSmoke: React.FC = () => {
     <Page toolbar>
       <Content>
         <AuthStepHeader>
-          <AuthStepTitle>Nombre de pas</AuthStepTitle>
+          <AuthStepTitle>Conso de cigarettes</AuthStepTitle>
           <ChartContainer>
             <Bar options={options} data={data} />
           </ChartContainer>
@@ -69,7 +73,7 @@ const Content = styled.div`
 `;
 
 const ChartContainer = styled.div`
-  max-height: 400px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   position: relative;
