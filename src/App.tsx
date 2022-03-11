@@ -38,6 +38,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { AuthProvider } from "./contexts/Auth";
 import { GlobalThemeProvider } from "./contexts/GlobalTheme";
 import StatisticSmoke from "./screens/Statistic/Smoke";
+import StatisticStep from "./screens/Statistic/Step";
 
 setupIonicReact();
 
@@ -59,6 +60,9 @@ const App: React.FC = () => {
                   </Route>
                   <Route exact path={ROUTES.STATISTICS_SMOKE}>
                     <StatisticSmoke />
+                  </Route>
+                  <Route exact path={ROUTES.STATISTICS_STEP}>
+                    <StatisticStep />
                   </Route>
                   <Route exact path={ROUTES.ACCOUNT}>
                     <Account />
