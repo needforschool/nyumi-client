@@ -55,3 +55,7 @@ export const insertCigarette = (): Cigarette[] => {
 
   return data.entries;
 };
+
+export const clearStorage = (): void => {
+  localStorage.clear();
+};

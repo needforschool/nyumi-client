@@ -9,7 +9,7 @@ import { Cigarette } from "../../types/cigarette";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_SMOKE } from "../../queries/smoke";
 
-import { Health } from "@awesome-cordova-plugins/health";
+import { Health, HealthData } from "@awesome-cordova-plugins/health";
 
 const Home: React.FC = () => {
   const router = useHistory();
@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   const [todayCigarettes, setTodayCigarettes] = useState<number>(
     retrieveCigarettes("today").length
   );
+  const [todaySteps, setTodaySteps] = useState<string>("0");
 
   const [addSmoke] = useMutation(ADD_SMOKE);
 
@@ -29,14 +30,19 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     Health.isAvailable().then((isAvailable) => {
-      console.log("health available", isAvailable);
       if (isAvailable) {
         Health.requestAuthorization([
           {
             read: ["steps"],
           },
         ]).then((value: any) => {
-          console.log("health request", value);
+          -Health.query({
+            startDate: new Date(new Date().setHours(0, 0, 0, 0)),
+            endDate: new Date(),
+            dataType: "steps",
+          }).then((value: HealthData[]) => {
+            setTodaySteps(value[0].value);
+          });
         });
       }
     });
@@ -83,7 +89,7 @@ const Home: React.FC = () => {
           </CardHeader>
           <CardContent>
             <CardSection>
-              <CardCounter>{1934}</CardCounter>
+              <CardCounter>{todaySteps}</CardCounter>
             </CardSection>
             <CardSection
               onClick={() => {

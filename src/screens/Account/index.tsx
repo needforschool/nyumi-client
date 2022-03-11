@@ -15,16 +15,18 @@ import {
 } from "../../components/Layout/Auth";
 import Page from "../../components/Page";
 import ROUTES from "../../constants/routes";
+import { StatusBar } from "@awesome-cordova-plugins/status-bar";
 import { AuthContext } from "../../contexts/Auth";
 import { useForm } from "../../hooks/useForm";
-import { UPDATE_USER } from "../../queries/users";
+import { DELETE_USER, UPDATE_USER } from "../../queries/users";
 import themes from "../../services/themes";
 import capitalize from "../../utils/captitalize";
+import { clearStorage } from "../../services/storage";
 
 const Account: React.FC = () => {
   const router = useHistory();
 
-  const { user, login } = React.useContext(AuthContext);
+  const { user, login, logout } = React.useContext(AuthContext);
 
   const updateUserCallback = () => {
     updateUser();
@@ -42,6 +44,14 @@ const Account: React.FC = () => {
     variables: values,
     update(_, { data: { updateUser: _userData } }) {
       login(_userData);
+    },
+  });
+
+  const [deleteUser] = useMutation(DELETE_USER, {
+    update() {
+      clearStorage();
+      logout();
+      router.push(ROUTES.SIGN_IN);
     },
   });
 
@@ -125,6 +135,9 @@ const Account: React.FC = () => {
         >
           {"Sauvegarder"}
         </AuthButton>
+        <DeleteAccountButton outline onClick={() => deleteUser()}>
+          {"Supprimer mon compte"}
+        </DeleteAccountButton>
       </Content>
     </Page>
   );
@@ -151,6 +164,11 @@ const Row = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+`;
+
+const DeleteAccountButton = styled(AuthButton)`
+  color: ${({ theme }) => theme.colors.accent.red};
+  border-color: ${({ theme }) => theme.colors.accent.red};
 `;
 
 export default Account;
