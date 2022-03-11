@@ -57,6 +57,13 @@
   dependencies:
     "@types/cordova" latest
 
+"@awesome-cordova-plugins/status-bar@^5.40.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/status-bar/-/status-bar-5.40.0.tgz#b16ae77b7cee23c4b50c0cfda7d50deba8b1fff4"
+  integrity sha512-Xc8PsDpYT+JUks0/u3sg5mslhDhpH1dtLTKGX3XFbSDjl9k0MpvFNI9jqiBmF03lTtcrqomNFkjRini+mWp73g==
+  dependencies:
+    "@types/cordova" latest
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.8.3":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
@@ -3462,6 +3469,11 @@ cordova-plugin-health@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/cordova-plugin-health/-/cordova-plugin-health-2.0.3.tgz#eed86ce278b60e45e1dcc3abc94f1fd8e02350ce"
   integrity sha512-gy6BNjO86mgdwTrYerCmttvKVRP/zPgyG0h8pBSjbylPZOtbyGtMmmjjhod+srud3YZlqkwFc7vA6fsdpJXGZQ==
+
+cordova-plugin-statusbar@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-statusbar/-/cordova-plugin-statusbar-3.0.0.tgz#371b54cef2594550118ef51c1d677c8adb3bc668"
+  integrity sha512-nzkeWeyLA6+1FryzO0aeB6NS8MZ45gnBYeq2VZqfdNbddZEgtpI4XPYdBVxvm9NhcVoJ3tdA1OBnQD9JryoV0Q==
 
 core-js-compat@^3.20.2, core-js-compat@^3.21.0:
   version "3.21.0"
