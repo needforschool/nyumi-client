@@ -98,20 +98,20 @@ const StatisticSmoke: React.FC = () => {
       <Content>
         <AuthStepHeader>
           <AuthStepTitle>Conso de cigarettes</AuthStepTitle>
-          <SocialButton
-            href={`https://twitter.com/intent/tweet?text=J'ai%20téléchargé%20l'application%20Nyumi%20grâce%20à%20laquelle%20je%20peux%20suivre%20ma%20consommation%20de%20tabac%20et%20aujourd'hui%20je%20n'ai%20consommé%20que%20${cigarettes.length}%20cigarettes%20!&via=onRuntime`}
-            backgroundColor="#1c9bef;"
-          >
-            <SocialContent>
-              <Share size="32" color="#FFFF" />
-              <SocialTitle>{"Partager"}</SocialTitle>
-            </SocialContent>
-          </SocialButton>
           <ChartContainer>
             <Chart type={"bar"} data={chartData} options={options} />
           </ChartContainer>
         </AuthStepHeader>
       </Content>
+      <SocialButton
+        href={`https://twitter.com/intent/tweet?text=J'ai%20téléchargé%20l'application%20Nyumi%20grâce%20à%20laquelle%20je%20peux%20suivre%20ma%20consommation%20de%20tabac%20et%20aujourd'hui%20je%20n'ai%20consommé%20que%20${cigarettes.length}%20cigarettes%20!&via=onRuntime`}
+        backgroundColor="#1c9bef;"
+      >
+        <SocialContent>
+          <Share size="32" color="#FFFF" />
+          <SocialTitle>{"Partager"}</SocialTitle>
+        </SocialContent>
+      </SocialButton>
     </Page>
   );
 };
@@ -132,6 +132,7 @@ const SocialButton = styled(({ children, ...props }) => (
   color: ${({ theme }) => theme.colors.text.lightest};
   ${({ backgroundColor }) =>
     backgroundColor && `background-color: ${backgroundColor}`}
+  margin: 15px auto;
 `;
 
 const SocialContent = styled.div`
