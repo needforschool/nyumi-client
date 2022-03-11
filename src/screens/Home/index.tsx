@@ -8,14 +8,17 @@ const Home: React.FC = () => {
   const router = useHistory();
 
   return (
-    <Page toolbar>
-      <Header>
+    <Page
+      toolbar
+      disableBack
+      header={
         <Setting2
           onClick={() => {
             router.push(ROUTES.ACCOUNT);
           }}
         />
-      </Header>
+      }
+    >
       <Content>
         <Card color={"rgb(46, 213, 115)"}>
           <CardHeader>
@@ -61,12 +64,6 @@ const Home: React.FC = () => {
     </Page>
   );
 };
-
-const Header = styled.header`
-  display: flex;
-  justify-content: flex-end;
-  padding: 15px;
-`;
 
 const Content = styled.div`
   display: flex;
