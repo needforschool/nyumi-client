@@ -30,6 +30,7 @@
     "iconsax-react": "^0.0.8",
     "ionicons": "^5.4.0",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.1",
