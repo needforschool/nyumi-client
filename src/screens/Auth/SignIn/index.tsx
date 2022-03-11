@@ -18,6 +18,7 @@ import {
 } from "../../../components/Layout/Auth";
 import Link from "../../../components/Link";
 import Page from "../../../components/Page";
+import APP from "../../../constants/app";
 import ROUTES from "../../../constants/routes";
 import { AuthContext } from "../../../contexts/Auth";
 import { useForm } from "../../../hooks/useForm";
@@ -54,7 +55,7 @@ const SignIn: React.FC = () => {
     <Page>
       <AuthContainer>
         <AuthHeader>
-          <AuthTitle>Nyumi</AuthTitle>
+          <AuthTitle>{APP.NAME}</AuthTitle>
         </AuthHeader>
         <AuthStepHeader>
           <AuthStepTitle>Bienvenue,</AuthStepTitle>

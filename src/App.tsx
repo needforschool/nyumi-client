@@ -40,16 +40,18 @@ import PrivateProvider from "./components/Auth/Provider";
 import { client as apolloClient } from "./services/apollo/client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { AuthProvider } from "./contexts/Auth";
+import {
+  GlobalThemeContext,
+  GlobalThemeProvider,
+} from "./contexts/GlobalTheme";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const isDarkTheme = useThemeDetector();
-
   return (
     <ApolloProvider client={apolloClient}>
       <AuthProvider>
-        <ThemeProvider theme={isDarkTheme ? themes.dark : themes.light}>
+        <GlobalThemeProvider>
           <GlobalStyle />
           <IonApp>
             <IonReactRouter>
@@ -90,7 +92,7 @@ const App: React.FC = () => {
               </IonRouterOutlet>
             </IonReactRouter>
           </IonApp>
-        </ThemeProvider>
+        </GlobalThemeProvider>
       </AuthProvider>
     </ApolloProvider>
   );
