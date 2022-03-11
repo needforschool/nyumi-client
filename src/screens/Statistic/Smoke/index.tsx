@@ -18,6 +18,9 @@ import { GET_SMOKES } from "../../../queries/smoke";
 import { Cigarette } from "../../../types/cigarette";
 import convertDate from "../../../utils/convertDate";
 import { AuthContext } from "../../../contexts/Auth";
+import { Share } from "iconsax-react";
+import Button from "../../../components/Layout/Button";
+import Link from "../../../components/Link";
 
 ChartJS.register(
   LinearScale,
@@ -95,6 +98,15 @@ const StatisticSmoke: React.FC = () => {
       <Content>
         <AuthStepHeader>
           <AuthStepTitle>Conso de cigarettes</AuthStepTitle>
+          <SocialButton
+            href={`https://twitter.com/intent/tweet?text=J'ai%20téléchargé%20l'application%20Nyumi%20grâce%20à%20laquelle%20je%20peux%20suivre%20ma%20consommation%20de%20tabac%20et%20aujourd'hui%20je%20n'ai%20consommé%20que%20${cigarettes.length}%20cigarettes%20!&via=onRuntime`}
+            backgroundColor="#1c9bef;"
+          >
+            <SocialContent>
+              <Share size="32" color="#FFFF" />
+              <SocialTitle>{"Partager"}</SocialTitle>
+            </SocialContent>
+          </SocialButton>
           <ChartContainer>
             <Chart type={"bar"} data={chartData} options={options} />
           </ChartContainer>
@@ -108,6 +120,28 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 15px;
+`;
+
+const SocialButton = styled(({ children, ...props }) => (
+  <Button as={Link} {...props}>
+    {children}
+  </Button>
+))<{ backgroundColor: string }>`
+  display: flex;
+  width: 130px;
+  color: ${({ theme }) => theme.colors.text.lightest};
+  ${({ backgroundColor }) =>
+    backgroundColor && `background-color: ${backgroundColor}`}
+`;
+
+const SocialContent = styled.div`
+  font-weight: ${({ theme }) => theme.weight.medium};
+  display: flex;
+  align-items: center;
+`;
+
+const SocialTitle = styled.h2`
+  font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
 const ChartContainer = styled.div`
