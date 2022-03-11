@@ -6,6 +6,8 @@ import ROUTES from "../../constants/routes";
 import { useCallback, useState } from "react";
 import { insertCigarette, retrieveCigarettes } from "../../services/storage";
 import { Cigarette } from "../../types/cigarette";
+import { useMutation } from "@apollo/react-hooks";
+import { ADD_SMOKE } from "../../queries/smoke";
 
 const Home: React.FC = () => {
   const router = useHistory();
@@ -14,9 +16,13 @@ const Home: React.FC = () => {
     retrieveCigarettes("today").length
   );
 
+  const [addSmoke] = useMutation(ADD_SMOKE);
+
   const handleCigaretteAdd = useCallback(() => {
     const cigarettes: Cigarette[] = insertCigarette();
     setTodayCigarettes(cigarettes.length);
+
+    addSmoke();
   }, []);
 
   return (
