@@ -3,9 +3,44 @@ import Page from "../../components/Page";
 import { AddSquare, Kanban, Setting2 } from "iconsax-react";
 import { useHistory } from "react-router";
 import ROUTES from "../../constants/routes";
+import { useCallback, useEffect, useState } from "react";
+import { insertCigarette, retrieveCigarettes } from "../../services/storage";
+import { Cigarette } from "../../types/cigarette";
+import { useMutation } from "@apollo/react-hooks";
+import { ADD_SMOKE } from "../../queries/smoke";
+
+import { Health } from "@awesome-cordova-plugins/health";
 
 const Home: React.FC = () => {
   const router = useHistory();
+
+  const [todayCigarettes, setTodayCigarettes] = useState<number>(
+    retrieveCigarettes("today").length
+  );
+
+  const [addSmoke] = useMutation(ADD_SMOKE);
+
+  const handleCigaretteAdd = useCallback(() => {
+    const cigarettes: Cigarette[] = insertCigarette();
+    setTodayCigarettes(cigarettes.length);
+
+    addSmoke();
+  }, []);
+
+  useEffect(() => {
+    Health.isAvailable().then((isAvailable) => {
+      console.log("health available", isAvailable);
+      if (isAvailable) {
+        Health.requestAuthorization([
+          {
+            read: ["steps"],
+          },
+        ]).then((value: any) => {
+          console.log("health request", value);
+        });
+      }
+    });
+  }, []);
 
   return (
     <Page
@@ -26,10 +61,10 @@ const Home: React.FC = () => {
           </CardHeader>
           <CardContent>
             <CardSection>
-              <CardCounter>{3}</CardCounter>
+              <CardCounter>{todayCigarettes}</CardCounter>
             </CardSection>
-            <CardSection>
-              <AddSquare size={40} />
+            <CardSection onClick={() => handleCigaretteAdd()}>
+              <AddSquare size={60} />
               <CardSectionText>{"Ajouter"}</CardSectionText>
             </CardSection>
             <CardSection
@@ -37,7 +72,7 @@ const Home: React.FC = () => {
                 router.push(ROUTES.STATISTICS_SMOKE);
               }}
             >
-              <Kanban size={30} />
+              <Kanban size={50} />
               <CardSectionText>{"Voir plus"}</CardSectionText>
             </CardSection>
           </CardContent>
@@ -55,7 +90,7 @@ const Home: React.FC = () => {
                 router.push(ROUTES.STATISTICS_WALK);
               }}
             >
-              <Kanban size={30} />
+              <Kanban size={50} />
               <CardSectionText>{"Voir plus"}</CardSectionText>
             </CardSection>
           </CardContent>
@@ -72,9 +107,12 @@ const Content = styled.div`
 `;
 
 const Card = styled.section<{ color?: string }>`
+  display: flex;
+  flex-direction: column;
   background-color: ${({ theme, color }) =>
     color ? color : theme.colors.layout.darkest};
   border-radius: 6px;
+  height: 150px;
   padding: 10px;
   margin-top: 15px;
 
@@ -92,6 +130,8 @@ const CardTitle = styled.h1`
 const CardContent = styled.h1`
   display: flex;
   margin-top: 10px;
+  height: 100%;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -108,6 +148,7 @@ const CardSection = styled.div`
 `;
 
 const CardSectionText = styled.h2`
+  margin-top: 5px;
   font-size: ${({ theme }) => theme.size.small};
 `;
 
