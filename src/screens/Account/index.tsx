@@ -110,7 +110,11 @@ const Account: React.FC = () => {
       <Content>
         <Section>
           <SubTitle>Objectifs</SubTitle>
-          <Row></Row>
+          <Row>
+            <AuthButton valid onClick={() => router.push(ROUTES.GOAL)}>
+              {"Modifier les objectifs"}
+            </AuthButton>
+          </Row>
         </Section>
         <Section>
           <SubTitle>Thème</SubTitle>
@@ -140,7 +144,18 @@ const Account: React.FC = () => {
         >
           {"Sauvegarder"}
         </AuthButton>
-        <DeleteAccountButton outline onClick={() => deleteUser()}>
+
+        <AuthButton
+          valid
+          outline
+          onClick={() => {
+            logout();
+            router.push(ROUTES.SIGN_IN);
+          }}
+        >
+          {"Déconnexion"}
+        </AuthButton>
+        <DeleteAccountButton valid outline onClick={() => deleteUser()}>
           {"Supprimer mon compte"}
         </DeleteAccountButton>
       </Content>

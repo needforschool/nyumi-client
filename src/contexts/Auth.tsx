@@ -56,7 +56,6 @@ const AuthProvider = (props: any) => {
   };
 
   const logout = async () => {
-    await router.push(ROUTES.SIGN_IN);
     localStorage.removeItem("jwtToken");
     dispatch({ type: "LOGOUT" });
   };

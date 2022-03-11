@@ -108,6 +108,15 @@ const SignUp: React.FC = () => {
             <AuthButton type={"submit"} valid={valid}>
               {"S'enregistrer"}
             </AuthButton>
+            <AuthButton
+              valid
+              outline
+              onClick={() => {
+                router.push(ROUTES.SIGN_IN);
+              }}
+            >
+              {"Retour"}
+            </AuthButton>
           </FieldGroup>
         </AuthForm>
       </AuthContainer>
