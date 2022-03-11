@@ -3,8 +3,29 @@ import styled from "styled-components";
 import Field from "../../components/Form/Field";
 import Button from "../../components/Layout/Button";
 import React from "react";
+import { useForm } from "../../hooks/useForm";
+import { UPDATE_USER_GOALS } from "../../queries/users";
+import { useMutation } from "@apollo/react-hooks";
 
 const Goal: React.FC = () => {
+  const updateUserCallback = () => {
+    updateUserGoals();
+  };
+
+  const { values, onChange, onSubmit, errors, setErrors } = useForm(
+    updateUserCallback,
+    {
+      goals: "",
+    }
+  );
+
+  const [updateUserGoals] = useMutation(UPDATE_USER_GOALS, {
+    variables: values,
+    update(_, { data: { updateUserGoals: _userData } }) {
+      //   login(_userData);
+    },
+  });
+
   return (
     <Page toolbar>
       <Content>
@@ -13,13 +34,17 @@ const Goal: React.FC = () => {
           <Subtitle>Choisir mes objectifs</Subtitle>
         </Header>
         <Goals>
-          <GoalContainer>
+          <GoalContainer onSubmit={() => console.log("gooooooaaal")}>
             <GoalName>Nombre de pas par jour</GoalName>
             <GoalField
               type="number"
               id={"steps"}
               name={"steps"}
               min={0}
+              onChange={onChange}
+              errors={errors}
+              setErrors={setErrors}
+              error={errors?.steps}
               placeholder=""
               autoFocus
               required
@@ -32,13 +57,23 @@ const Goal: React.FC = () => {
               id={"smoke"}
               name={"smoke"}
               min={0}
+              onChange={onChange}
+              errors={errors}
+              setErrors={setErrors}
+              error={errors?.smoke}
               placeholder=""
               autoFocus
               required
             />
           </GoalContainer>
         </Goals>
-        <GoalButton>Démarrer l’expérience !</GoalButton>
+        <GoalButton
+          onClick={(event) => {
+            onSubmit(event);
+          }}
+        >
+          Démarrer l’expérience !
+        </GoalButton>
       </Content>
     </Page>
   );
