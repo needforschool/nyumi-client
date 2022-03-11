@@ -34,3 +34,9 @@ export const UPDATE_USER_GOALS = gql`
     }
   }
 `;
+
+export const DELETE_USER = gql`
+  mutation deleteUser {
+    deleteUser
+  }
+`;
