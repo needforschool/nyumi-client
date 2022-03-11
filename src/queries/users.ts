@@ -21,9 +21,16 @@ export const UPDATE_USER = gql`
 `;
 
 export const UPDATE_USER_GOALS = gql`
-  mutation updateUser($goals: Number!) {
-    updateUser(goals: $goals) {
-      goals
+  mutation register($step: String!, $smoke: String!) {
+    updateUserGoals(goals: { step: $step, smoke: $smoke }) {
+      id
+      email
+      token
+      firstname
+      goals {
+        step
+        smoke
+      }
     }
   }
 `;
