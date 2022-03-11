@@ -7,6 +7,10 @@ export const LOGIN_USER = gql`
       email
       token
       firstname
+      goals {
+        step
+        smoke
+      }
     }
   }
 `;
@@ -24,6 +28,10 @@ export const REGISTER_USER = gql`
       email
       token
       firstname
+      goals {
+        step
+        smoke
+      }
     }
   }
 `;

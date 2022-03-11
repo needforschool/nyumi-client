@@ -1,50 +1,101 @@
 import Page from "../../components/Page";
 import styled from "styled-components";
+import Field from "../../components/Form/Field";
+import Button from "../../components/Layout/Button";
+import React from "react";
+import { useForm } from "../../hooks/useForm";
+import { UPDATE_USER_GOALS } from "../../queries/users";
+import { useMutation } from "@apollo/react-hooks";
+import { AuthContext } from "../../contexts/Auth";
+import { useHistory } from "react-router";
+import ROUTES from "../../constants/routes";
 
 const Goal: React.FC = () => {
+  const router = useHistory();
+  const { user, login } = React.useContext(AuthContext);
+
+  const updateUserCallback = () => {
+    updateUserGoals();
+  };
+
+  const { values, onChange, onSubmit, errors, setErrors } = useForm(
+    updateUserCallback,
+    {
+      step: user?.goals.step || 0,
+      smoke: user?.goals.smoke || 0,
+    }
+  );
+
+  const [updateUserGoals] = useMutation(UPDATE_USER_GOALS, {
+    variables: values,
+    update(_, { data: { updateUserGoals: _userData } }) {
+      login(_userData);
+      router.push(ROUTES.MAIN);
+    },
+  });
+
   return (
-    <Page>
-      <Container>
+    <Page toolbar>
+      <Content>
         <Header>
-          <Title>Mes Objectif</Title>
+          <Title>Mes Objectifs</Title>
           <Subtitle>Choisir mes objectifs</Subtitle>
         </Header>
-        <Objectifs>
-          <Objectif>
-            <Name>Nombre de pas par jour</Name>
-            <Cube>2500</Cube>
-          </Objectif>
-          <Objectif>
-            <Name>Nombre de cigarettes par jour</Name>
-            <Cube>5</Cube>
-          </Objectif>
-          <Objectif>
-            <Name>Nombre de pas par jour</Name>
-            <Cube>2500</Cube>
-          </Objectif>
-          <Objectif>
-            <Name>Nombre de cigarettes par jour</Name>
-            <Cube>5</Cube>
-          </Objectif>
-        </Objectifs>
-        <Btn>Démarrer l’expérience !</Btn>
-      </Container>
+        <Goals>
+          <GoalContainer onSubmit={() => console.log("gooooooaaal")}>
+            <GoalName>Nombre de pas par jour</GoalName>
+            <GoalField
+              type="number"
+              id={"step"}
+              name={"step"}
+              min={0}
+              value={values.step}
+              onChange={onChange}
+              errors={errors}
+              setErrors={setErrors}
+              error={errors?.steps}
+              placeholder=""
+              autoFocus
+              required
+            />
+          </GoalContainer>
+          <GoalContainer>
+            <GoalName>Nombre de cigarettes par jour</GoalName>
+            <GoalField
+              type="number"
+              id={"smoke"}
+              name={"smoke"}
+              min={0}
+              value={values.smoke}
+              onChange={onChange}
+              errors={errors}
+              setErrors={setErrors}
+              error={errors?.smoke}
+              placeholder=""
+              autoFocus
+              required
+            />
+          </GoalContainer>
+        </Goals>
+        <GoalButton
+          onClick={(event) => {
+            onSubmit(event);
+          }}
+        >
+          Démarrer l’expérience !
+        </GoalButton>
+      </Content>
     </Page>
   );
 };
 
-const Container = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: center;
-  height: 100%;
+  padding: 0 15px;
 `;
 
 const Header = styled.div`
-  margin-top: 50px;
-  margin-left: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -62,15 +113,16 @@ const Subtitle = styled.h2`
   font-weight: ${({ theme }) => theme.weight.bold};
 `;
 
-const Name = styled.h3`
+const GoalName = styled.h3`
   width: 120px;
   display: flex;
   flex-wrap: wrap;
-  font-size: ${({ theme }) => theme.size.tiny};
+  font-size: ${({ theme }) => theme.size.small};
   font-weight: ${({ theme }) => theme.weight.bold};
+  text-align: center;
 `;
 
-const Objectifs = styled.div`
+const Goals = styled.div`
   width: 100%;
   margin-top: 50px;
   margin-right: 60px;
@@ -80,7 +132,7 @@ const Objectifs = styled.div`
   align-items: center;
 `;
 
-const Objectif = styled.div`
+const GoalContainer = styled.div`
   margin: 10px 0;
   display: flex;
   flex-direction: column;
@@ -88,28 +140,22 @@ const Objectif = styled.div`
   align-items: center;
 `;
 
-const Cube = styled.div`
-  width: 100px;
-  height: 100px;
+const GoalField = styled(Field)`
   margin-top: 10px;
-  background-color: ${({ theme }) => theme.colors.layout.light};
-  color: #fff;
-  font-size: ${({ theme }) => theme.size.medium};
-  font-weight: ${({ theme }) => theme.weight.bold};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  font-size: ${({ theme }) => theme.size.title};
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
-const Btn = styled.button`
+const GoalButton = styled(Button)`
   font-size: ${({ theme }) => theme.size.small};
-  font-weight: ${({ theme }) => theme.weight.bold};
-  margin: 80px auto;
-  padding: 10px;
-  border-radius: 5px;
-  width: 90%;
-  text-align: center;
+  margin-top: 20px;
 `;
 
 export default Goal;

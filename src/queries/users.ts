@@ -20,6 +20,21 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const UPDATE_USER_GOALS = gql`
+  mutation register($step: String!, $smoke: String!) {
+    updateUserGoals(goals: { step: $step, smoke: $smoke }) {
+      id
+      email
+      token
+      firstname
+      goals {
+        step
+        smoke
+      }
+    }
+  }
+`;
+
 export const DELETE_USER = gql`
   mutation deleteUser {
     deleteUser
