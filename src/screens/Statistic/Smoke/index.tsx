@@ -1,28 +1,34 @@
 import styled from "styled-components";
 import { AuthStepHeader, AuthStepTitle } from "../../../components/Layout/Auth";
 import Page from "../../../components/Page";
-import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  CategoryScale,
   LinearScale,
+  CategoryScale,
   BarElement,
-  Title,
-  Tooltip,
+  PointElement,
+  LineElement,
   Legend,
+  Tooltip,
 } from "chart.js";
-import moment from "moment";
+import { Chart } from "react-chartjs-2";
+import React from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_SMOKES } from "../../../queries/smoke";
+import { Cigarette } from "../../../types/cigarette";
+import convertDate from "../../../utils/convertDate";
 
 ChartJS.register(
-  CategoryScale,
   LinearScale,
+  CategoryScale,
   BarElement,
-  Title,
-  Tooltip,
-  Legend
+  PointElement,
+  LineElement,
+  Legend,
+  Tooltip
 );
 
-export const options = {
+const options = {
   maintainAspectRatio: false,
   responsive: true,
   plugins: {
@@ -36,29 +42,59 @@ export const options = {
   },
 };
 
-const labels = [...new Array(7)].map((i, idx) =>
-  moment().startOf("day").subtract(idx, "days")
-);
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Conso de cigarettes",
-      data: labels.map(() => 100),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
-};
-
 const StatisticSmoke: React.FC = () => {
+  const { data } = useQuery(GET_SMOKES);
+
+  const cigarettes = data?.getAllSmoke || [];
+
+  // add convertDate to days array if the date is not already in the array
+  const days = cigarettes.reduce((acc: string[], cigarette: Cigarette) => {
+    const date = convertDate(cigarette.createdAt);
+    if (!acc.includes(date)) {
+      acc.push(date);
+    }
+    return acc;
+  }, [] as string[]);
+
+  const smokes = days.reduce((acc: number[], day: string) => {
+    const count = cigarettes.reduce((acc2: number, cigarette: Cigarette) => {
+      if (convertDate(cigarette.createdAt) === day) {
+        return acc2 + 1;
+      }
+      return acc2;
+    }, 0);
+    acc.push(count);
+    return acc;
+  }, [] as number[]);
+
+  console.log(smokes);
+
+  const chartData = {
+    labels: days,
+    datasets: [
+      {
+        type: "line" as const,
+        label: "Objectifs",
+        borderColor: "rgb(255, 99, 132)",
+        borderWidth: 2,
+        fill: false,
+        data: cigarettes.map(() => 50),
+      },
+      {
+        label: "Conso de cigarettes",
+        data: smokes,
+        backgroundColor: "rgb(26, 188, 156)",
+      },
+    ],
+  };
+
   return (
     <Page toolbar>
       <Content>
         <AuthStepHeader>
           <AuthStepTitle>Conso de cigarettes</AuthStepTitle>
           <ChartContainer>
-            <Bar options={options} data={data} />
+            <Chart type={"bar"} data={chartData} options={options} />
           </ChartContainer>
         </AuthStepHeader>
       </Content>
