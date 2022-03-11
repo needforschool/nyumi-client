@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>L&apos;application utilise les données de votre application Santé</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>L&apos;application utilise les données de votre application Santé</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>client</string>
+	<string>client</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -50,9 +54,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSHealthShareUsageDescription</key>
-	<string>App needs read access</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>App needs write access</string>
 </dict>
 </plist>
