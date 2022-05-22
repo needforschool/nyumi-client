@@ -1,0 +1,8 @@
+{
+  "name": "client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "npmClient": "yarn"
+}
